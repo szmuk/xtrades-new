@@ -83,26 +83,25 @@ export class AuthenticationService {
   postTest() {
 
     // eslint-disable-next-line max-len
-    const url = `/api/v1/user/registration?discordUserId=${this.user.id}&discordUsername=${this.user.username}&email=${this.user.email}&state=/`;
+    const url = `/functions/api/v1/user/registration?discordUserId=${this.user.id}&discordUsername=${this.user.username}&email=${this.user.email}&state=/`;
 
 
     this.http.post(url, {}, {
       headers: { 'x-functions-key': '9cAee/4ekOMeUzMDiF1skPZi1QmjhsrvX9l9FY2rgyGT/bIGEqgxBQ==' },
-    })
+    }).pipe(
+      tap(x => {
+        console.log(x);
+      }
+      )
+    ).subscribe();
+
+    this.http.get(`/api/v1/token?discordUserId=${this.user.id}&email=${this.user.email}`)
       .pipe(
         tap(x => {
-          console.log(x)
+          console.log(x);
         }
         )
       ).subscribe();
-
-    // this.http.get('/api/v1/alerts/trending', { responseType: 'text' })
-    //   .pipe(
-    //     tap(x => {
-    //       console.log(x)
-    //     }
-    //     )
-    //   ).subscribe();
   }
 
 }

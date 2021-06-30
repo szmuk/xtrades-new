@@ -1,6 +1,15 @@
 {
-    "/api/*": {
+    "/functions/api/*": {
         "target": "https://functions.alpha.xtrades.net",
+        "changeOrigin": true,
+        "secure": true,
+        "logLevel": "debug",
+        "pathRewrite": {
+            "^/functions/api/": "/api/"
+        }
+    },
+    "/api/*": {
+        "target": "https://api.alpha.xtrades.net",
         "changeOrigin": true,
         "secure": true,
         "logLevel": "debug"
