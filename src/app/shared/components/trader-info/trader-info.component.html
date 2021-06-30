@@ -1,0 +1,75 @@
+<div class="trader-info">
+
+  <div class="trader-info__section">
+    <div class="trader-info__section__title">
+      Trader's stats
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-lg="3" class="ion-no-padding">
+          <div class="trader-info__stat__value">{{trader?.stats?.rank}}</div>
+          <div class="trader-info__stat__title">Rank</div>
+        </ion-col>
+
+        <ion-col size="6" size-lg="3" class="ion-no-padding">
+          <div class="trader-info__stat__value">{{trader?.stats?.winRatePercent}}%</div>
+          <div class="trader-info__stat__title">Win rate</div>
+        </ion-col>
+
+        <ion-col size="6" size-lg="3" class="ion-no-padding">
+          <div class="trader-info__stat__value">{{trader?.stats?.avgGainPercent}}%</div>
+          <div class="trader-info__stat__title">Avg. gain</div>
+        </ion-col>
+
+        <ion-col size="6" size-lg="3" class="ion-no-padding">
+          <div class="trader-info__stat__value">{{trader?.stats?.avgTradeTime}}m</div>
+          <div class="trader-info__stat__title">Avg. trade time</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div class="trader-info__section">
+    <div class="trader-info__section__title">
+      Trader's style
+    </div>
+
+    <div class="trader-info__style">
+      <div class="trader-info__style__chip" *ngFor="let item of trader?.style">
+        {{item}}
+      </div>
+    </div>
+  </div>
+
+  <div class="trader-info__section">
+    <div class="trader-info__section__title">
+      Trader's other alerts
+    </div>
+
+    <div class="trader-info__alerts">
+      <div class="trader-info__alerts__alert" *ngFor="let alert of trader?.alerts">
+
+        <app-company-logo [company]="alert.company"></app-company-logo>
+
+        <div class="trader-info__alerts__alert__details">
+
+          <div class="trader-info__alerts__alert__details__info">
+            <div class="trader-info__alerts__alert__details__info__action">
+              {{alert.closed ? 'Sold' : 'Bought'}} {{alert.company.code}} shares
+            </div>
+            <div class="trader-info__alerts__alert__details__info__date">
+              Yesterday, {{ (alert.closed ? alert.closed : alert.opened) | date:' h:mm a'}}
+            </div>
+          </div>
+
+          <div class="trader-info__alerts__alert__details__price">
+            @ {{alert.currency}}{{alert.price}}
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="trending">
+  <div class="trending__header">
+    <div class="trending__header__title">Trending tickers</div>
+
+    <app-sort-filter class="trending__header__filter" [label]="'Filter by:'" [options]="sortOptions"
+      [(value)]="selectedSortOption" (valueChange)="sortChanged()">
+    </app-sort-filter>
+  </div>
+
+  <div class="trending__content">
+    <div class="trending__content__scrollable">
+
+      <app-trending-tile *ngFor="let trending of filteredTrendingList" [trending]="trending"
+        class="trending__content__item">
+      </app-trending-tile>
+
+    </div>
+  </div>
+</div>

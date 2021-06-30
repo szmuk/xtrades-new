@@ -1,0 +1,28 @@
+<ion-header no-border [translucent]="true" class="header">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button class="header__mobile-menu">
+        <img src="assets/logo-mini.png" />
+      </ion-menu-button>
+    </ion-buttons>
+    <div class="header__container">
+
+      <div class="header__title hidden-sm-down">{{title}}</div>
+
+      <ion-searchbar class="header__search" padding-end="0" placeholder="Search for ticker, user or other information">
+      </ion-searchbar>
+
+      <div class="header__actions">
+        <ion-button class="hidden-md-down">
+          <ion-icon slot="start" name="add"></ion-icon>
+          Invite a friend
+        </ion-button>
+        <ion-icon name="notifications" class="header__actions__icon hidden-md-down"></ion-icon>
+        <ion-icon name="help-circle" class="header__actions__icon hidden-md-down"></ion-icon>
+        <ion-icon name="cog" class="header__actions__icon hidden-md-down"></ion-icon>
+        <img src="assets/profile.png" class="header__actions__avatar" (click)="openOptions($event)" />
+      </div>
+
+    </div>
+  </ion-toolbar>
+</ion-header>

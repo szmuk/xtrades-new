@@ -1,0 +1,25 @@
+<div class="comment-item">
+  <div class="comment-item__avatar">
+    <app-avatar class="trader__person__avatar" [person]="comment.user"></app-avatar>
+  </div>
+  <div class="comment-item__content">
+    <div class="comment-item__content__details">
+      <div class="comment-item__content__details__name">
+        {{comment.user.name}}
+      </div>
+      <div class="comment-item__content__details__date">
+        {{comment.date | date:' h:mm a on dd MMM y'}}
+      </div>
+    </div>
+    <div class="comment-item__content__text">
+      {{comment.text}}
+    </div>
+  </div>
+
+  <div class="comment-item__toolbar">
+    <ion-icon name="happy-outline"></ion-icon>
+    <ion-icon name="arrow-undo-outline"></ion-icon>
+    <ion-icon name="flag-outline"></ion-icon>
+    <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+  </div>
+</div>

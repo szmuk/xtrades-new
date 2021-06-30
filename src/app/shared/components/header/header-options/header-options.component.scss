@@ -1,0 +1,25 @@
+.header-menu {
+  padding: 20px;
+  &__user {
+    font-size: 18px;
+    font-weight: 500;
+    padding-bottom: 10px;
+  }
+
+  &__action {
+    padding: 5px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--x-bg-lightgray);
+    }
+
+    ion-icon {
+      font-size: 20px;
+      margin-right: 15px;
+    }
+  }
+}

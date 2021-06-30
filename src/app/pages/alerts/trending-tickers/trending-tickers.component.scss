@@ -1,0 +1,37 @@
+.trending {
+  &__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &__filter {
+      flex-shrink: 0;
+    }
+
+    &__title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  &__content {
+    background-color: var(--x-bg-lightgray);
+    border-radius: 20px;
+    padding-top: 20px;
+    margin-top: 15px;
+
+    &__scrollable {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      overflow: auto;
+      padding-bottom: 10px;
+    }
+
+    &__item {
+      flex-shrink: 0;
+      margin: 10px;
+    }
+  }
+}

@@ -1,0 +1,152 @@
+<ion-header class="close">
+  <div class="close__container">
+    <div class="close__container__close" (click)="close()">
+      <ion-icon name="close"></ion-icon>
+    </div>
+  </div>
+</ion-header>
+<div class="content">
+
+  <ion-grid>
+
+    <!-- header -->
+    <ion-row>
+
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-no-padding">
+        <div class="trader">
+
+          <div class="trader__person">
+            <app-avatar class="trader__person__avatar" [person]="alert.user"></app-avatar>
+
+            <div class="trader__person__info">
+              <div class="trader__person__info__name">
+                {{alert.user.name}}
+              </div>
+              <div class="trader__person__info__login">
+                @{{alert.user.login}}
+              </div>
+            </div>
+          </div>
+
+          <div class="trader__follow" *ngIf="!alert.user.following">
+            Follow
+          </div>
+          <div class="trader__follow trader__follow--unfollow" *ngIf="alert.user.following">
+            Unfollow
+          </div>
+        </div>
+
+      </ion-col>
+
+      <ion-col size="12" size-md="6" size-lg="8" class="ion-no-padding">
+        <div class="alert">
+          <div class="alert__details">
+
+            <app-company-logo [company]="alert.company"></app-company-logo>
+
+            <div class="alert__details__info">
+              <div class="alert__details__info__action">
+                {{alert.closed ? 'Sold' : 'Bought'}} {{alert.company.code}} shares
+              </div>
+              <div class="alert__details__info__price">
+                @ {{alert.currency}}{{alert.price}}
+              </div>
+            </div>
+          </div>
+
+          <div class="alert__date">
+            {{getDate(alert.closed ? alert.closed : alert.opened)}}
+          </div>
+
+          <div class="alert__result">
+            <div class="alert__result alert__result--made" *ngIf="alert.closed && alert.gainLoss > 0">
+              Made {{alert.gainLoss}}%
+            </div>
+            <div class="alert__result alert__result--lost" *ngIf="alert.closed && alert.gainLoss < 0">
+              Lost {{(alert.gainLoss * -1)}}%
+            </div>
+            <div class="alert__result alert__result--up" *ngIf="!alert.closed && alert.gainLoss > 0">
+              Up {{alert.gainLoss}}%
+            </div>
+            <div class="alert__result alert__result--down" *ngIf="!alert.closed && alert.gainLoss < 0">
+              Down {{(alert.gainLoss * -1)}}%
+            </div>
+            <div class="alert__result alert__result--zero" *ngIf="alert.gainLoss === 0">
+              {{alert.gainLoss}}%
+            </div>
+          </div>
+
+
+          <div class="alert__actions">
+            <div class="alert__actions__action" [class.alert__actions__action--toggled]="alert.liked"
+              (click)="like(alert)">
+              <ion-icon name="thumbs-up"></ion-icon>
+              <div>{{alert.likesCount}}</div>
+            </div>
+            <div class="alert__actions__action" [class.alert__actions__action--toggled]="alert.saved"
+              (click)="save(alert)">
+              <ion-icon name="bookmark"></ion-icon>
+              <div>{{alert.savedCount}}</div>
+            </div>
+            <div class="alert__actions__action" [class.alert__actions__action--toggled]="alert.commented">
+              <ion-icon name="chatbox"></ion-icon>
+              <div>{{alert.commentsCount}}</div>
+            </div>
+          </div>
+
+          <ion-button>
+            <ion-icon slot="start" name="cash"></ion-icon>
+            Give a tip
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <!-- content -->
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-no-padding">
+        <app-trader-info [traderId]="alert.user.id"></app-trader-info>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="8" class="ion-no-padding">
+        <div class="alert-details">
+          <div class="alert-details__scroll">
+            <div class="alert-details__description">
+              <div class="alert-details__description__title">
+                SPY entry at old support
+                {{alert.descriptionTitle}}
+              </div>
+              <div class="alert-details__description__text" [innerHTML]="alert.descriptionHtml">
+              </div>
+
+              <div class="alert-details__graph">
+                <img [src]="'assets/' + alert.graphUrl" />
+              </div>
+            </div>
+            <div class="alert-details__comments">
+              <app-comments-list [comments]="alert.comments"></app-comments-list>
+            </div>
+
+            <div class="alert-details__comment-mobile hidden-md-up">
+              <app-comment></app-comment>
+            </div>
+          </div>
+
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="comment hidden-md-down">
+    <ion-grid class="comment__grid-el">
+      <ion-row class="comment__grid-el">
+        <ion-col size="12" size-md="6" size-lg="4" class="ion-no-padding">
+        </ion-col>
+        <ion-col size="12" size-md="6" size-lg="8" class="ion-no-padding comment__grid-el">
+          <div class="comment__container">
+            <app-comment></app-comment>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</div>

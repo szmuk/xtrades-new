@@ -1,0 +1,116 @@
+<div class="table">
+
+  <ion-grid>
+    <ion-row *ngFor="let alert of alerts" class="table__row" [class.table__row--closed]="alert.closed"
+      (click)="openAlert(alert)">
+
+      <!-- AVATAR, NAME -->
+      <ion-col size="12" size-md="12" size-lg="2">
+        <div class="table__person">
+
+          <app-avatar [person]="alert.user"></app-avatar>
+
+          <div class="table__person__info">
+            <div class="table__person__info__name">
+              {{alert.user.name}}
+            </div>
+            <div class="table__person__info__login">
+              @{{alert.user.login}}
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- COMPANY, ACTION -->
+      <ion-col size="12" size-md="12" size-lg="3">
+        <div class="table__action">
+
+          <app-company-logo [company]="alert.company"></app-company-logo>
+
+          <div class="table__action__info">
+            <div class="table__action__info__action">
+              {{alert.closed ? 'Sold' : 'Bought'}} {{alert.company.code}} shares
+            </div>
+            <div class="table__action__info__price">
+              @ {{alert.currency}}{{alert.price}}
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- DATE -->
+      <ion-col size="6" size-md="3" size-lg="2">
+        <div class="table__date">
+          <div class="table__date__container">
+            <div class="table__date__closed" *ngIf="alert.closed">
+              Closed {{getDate(alert.closed)}}
+            </div>
+            <div class="table__date__opened">
+              Opened {{getDate(alert.opened)}}
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- TYPE -->
+      <ion-col size="6" size-md="3" size-lg="1">
+        <div class="table__type">
+          <div class="table__type__text">
+            {{alert.type}}
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- RESULT -->
+      <ion-col size="6" size-md="3" size-lg="2">
+        <div class="table__result">
+          <div>
+            <div class="table__result__container table__result__container--made"
+              *ngIf="alert.closed && alert.gainLoss > 0">
+              Made {{alert.gainLoss}}%
+            </div>
+            <div class="table__result__container table__result__container--lost"
+              *ngIf="alert.closed && alert.gainLoss < 0">
+              Lost {{(alert.gainLoss * -1)}}%
+            </div>
+            <div class="table__result__container table__result__container--up"
+              *ngIf="!alert.closed && alert.gainLoss > 0">
+              Up {{alert.gainLoss}}%
+            </div>
+            <div class="table__result__container table__result__container--down"
+              *ngIf="!alert.closed && alert.gainLoss < 0">
+              Down {{(alert.gainLoss * -1)}}%
+            </div>
+            <div class="table__result__container table__result__container--zero" *ngIf="alert.gainLoss === 0">
+              {{alert.gainLoss}}%
+            </div>
+          </div>
+        </div>
+      </ion-col>
+
+      <!-- ACTIONS -->
+      <ion-col size="6" size-md="3" size-lg="2">
+        <div class="table__actions">
+          <div class="table__actions__action" [class.table__actions__action--toggled]="alert.commented"
+            (click)="comment($event, alert)">
+            <ion-icon name="chatbox"></ion-icon>
+            <div>{{alert.commentsCount}}</div>
+          </div>
+          <div class="table__actions__action" [class.table__actions__action--toggled]="alert.saved"
+            (click)="save($event, alert)">
+            <ion-icon name="bookmark"></ion-icon>
+            <div>{{alert.savedCount}}</div>
+          </div>
+          <div class="table__actions__action" [class.table__actions__action--toggled]="alert.liked"
+            (click)="like($event, alert)">
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>{{alert.likesCount}}</div>
+          </div>
+        </div>
+      </ion-col>
+
+
+    </ion-row>
+  </ion-grid>
+
+</div>

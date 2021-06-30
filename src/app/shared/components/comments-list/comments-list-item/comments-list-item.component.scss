@@ -1,0 +1,71 @@
+.comment-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+
+  &__toolbar {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: white;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    font-size: 20px;
+    box-shadow: 1px 2px 9px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+
+    ion-icon {
+      margin: 0 5px;
+      cursor: pointer;
+
+      &:hover {
+        color: var(--x-action);
+      }
+    }
+  }
+
+  &:hover .comment-item__toolbar {
+    visibility: visible;
+  }
+
+  &:hover {
+    background: var(--x-bg-lightgray);
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    flex-grow: 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-left: 20px;
+
+    &__details {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      &__name {
+        font-weight: 500;
+      }
+
+      &__date {
+        color: var(--x-text-darkgray);
+        font-size: 13px;
+        margin-left: 10px;
+        margin-bottom: -2px;
+      }
+    }
+
+    &__text {
+      margin-top: 5px;
+      font-size: 15px;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div class="alerts">
+  <div class="alerts__title">Recent alerts</div>
+  <div class="alerts__toolbar">
+
+    <app-sort-filter class="alerts__toolbar__item" [display]="'bar'" [options]="filterOptions"
+      [(value)]="selectedFilterOption" (valueChange)="filterChanged()">
+    </app-sort-filter>
+
+    <app-sort-filter class="alerts__toolbar__item" [options]="sortOptions" [(value)]="selectedSortOption"
+      (valueChange)="sortChanged()">
+    </app-sort-filter>
+
+  </div>
+
+  <div class="alerts__table">
+    <app-alerts-table [alerts]="sortedFilteredAlertsList"></app-alerts-table>
+  </div>
+
+</div>

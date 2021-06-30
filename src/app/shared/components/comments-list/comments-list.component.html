@@ -1,0 +1,29 @@
+<div class="comments">
+  <div class="comments__divider">
+    <div class="comments__divider__line"></div>
+    <div class="comments__divider__text">Today</div>
+    <div class="comments__divider__line"></div>
+  </div>
+  <div class="comments__section">
+    <app-comments-list-item *ngFor="let comment of today" [comment]="comment"></app-comments-list-item>
+  </div>
+
+  <div class="comments__divider">
+    <div class="comments__divider__line"></div>
+    <div class="comments__divider__text">Yesterday</div>
+    <div class="comments__divider__line"></div>
+  </div>
+  <div class="comments__section">
+    <app-comments-list-item *ngFor="let comment of yesterday" [comment]="comment"></app-comments-list-item>
+  </div>
+
+  <div class="comments__divider">
+    <div class="comments__divider__line"></div>
+    <div class="comments__divider__text">Older</div>
+    <div class="comments__divider__line"></div>
+  </div>
+  <div class="comments__section">
+    <app-comments-list-item *ngFor="let comment of older" [comment]="comment"></app-comments-list-item>
+  </div>
+
+</div>

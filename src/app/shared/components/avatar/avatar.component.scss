@@ -1,0 +1,26 @@
+:host {
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.avatar {
+  position: relative;
+
+  img {
+    height: 50px;
+    width: 50px;
+    border: 3px solid white;
+    border-radius: 25px;
+    box-shadow: 1px 2px 9px rgba(0, 0, 0, 0.4);
+  }
+  &__alerts {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--x-action);
+    color: white;
+    font-size: 12px;
+    padding: 3px;
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,23 @@
+.alerts {
+  &__title {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  &__toolbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-wrap: wrap-reverse;
+
+    &__item {
+      margin: 5px 0;
+    }
+  }
+
+  &__table {
+    margin-top: 25px;
+  }
+}

@@ -1,0 +1,20 @@
+.comments {
+  &__divider {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    &__line {
+      border-bottom: 1px solid var(--x-bg-gray);
+      flex-grow: 1;
+      margin: 0 15px;
+    }
+    &__text {
+      font-size: 13px;
+      color: var(--x-text-darkgray);
+    }
+  }
+
+  &__section {
+    margin: 15px 0 25px 0;
+  }
+}

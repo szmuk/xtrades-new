@@ -4,12 +4,24 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'alerts',
     pathMatch: 'full'
   },
   {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
+    path: 'alerts',
+    loadChildren: () => import('./pages/alerts/alerts.module').then(m => m.AlertsPageModule)
+  },
+  {
+    path: 'leaderboard',
+    loadChildren: () => import('./pages/leaderboard/leaderboard.module').then(m => m.LeaderboardPageModule)
+  },
+  {
+    path: 'xhub',
+    loadChildren: () => import('./pages/xhub/xhub.module').then(m => m.XhubPageModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'alerts'
   }
 ];
 
@@ -19,4 +31,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

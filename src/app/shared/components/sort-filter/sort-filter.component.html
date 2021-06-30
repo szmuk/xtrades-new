@@ -1,0 +1,19 @@
+<div class="dropdown" (click)="openOptions($event)" *ngIf="display === 'dropdown'">
+  <div *ngIf="!label">Sort by:</div>
+  <div *ngIf="label">{{label}}</div>
+  <div *ngIf="value" class="dropdown__result">{{value.value}}</div>
+  <div *ngIf="!value" class="dropdown__result dropdown__result--placeholder">{{placeholder}}</div>
+  <ion-icon name="chevron-down-outline" class="dropdown__icon"></ion-icon>
+</div>
+
+<div class="bar" *ngIf="display === 'bar'">
+  <div *ngIf="label" class="bar__label">{{label}}</div>
+  <div class="bar__options">
+    <div *ngFor="let option of options" class="bar__options__option" (click)="optionSelected(option)">
+      <div class="bar__options__option__inside"
+        [class.bar__options__option__inside--selected]="option.key === value?.key">
+        {{option.value}}
+      </div>
+    </div>
+  </div>
+</div>

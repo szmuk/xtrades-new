@@ -1,0 +1,249 @@
+:host {
+  color: var(--x-text);
+}
+
+.close {
+  --background: transparent;
+
+  &__container {
+    display: flex;
+    flex-direction: row-reverse;
+    padding-bottom: 10px;
+
+    &__close {
+      height: 30px;
+      width: 30px;
+      cursor: pointer;
+      color: white;
+
+      font-size: 30px;
+      background: rgb(110, 110, 110);
+      border-radius: 5px;
+    }
+  }
+}
+
+.content {
+  border-radius: 20px;
+  background: white;
+  height: 100%;
+
+  @media (max-width: 991px) {
+    overflow: auto;
+  }
+}
+
+.trader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid var(--x-bg-gray);
+  height: 100%;
+
+  &__person {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__avatar {
+      flex-grow: 0;
+      flex-shrink: 0;
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      margin-left: 15px;
+
+      &__name {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+
+      &__login {
+        color: var(--x-text-light);
+      }
+    }
+  }
+
+  &__follow {
+    text-align: center;
+    background: var(--x-action-light);
+    color: var(--x-action);
+    padding: 7px 15px;
+    border-radius: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+      transition: all 0.1s ease;
+      opacity: 0.7;
+    }
+
+    &--unfollow {
+      background: var(--x-fail-light);
+      color: var(--x-fail);
+    }
+  }
+}
+
+.alert {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--x-bg-gray);
+  height: 100%;
+  padding: 10px;
+  border-left: 1px solid var(--x-bg-gray);
+  flex-wrap: wrap;
+
+  @media (max-width: 991px) {
+    height: unset;
+  }
+
+  &__details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &__info {
+      flex-grow: 1;
+      flex-shrink: 1;
+      display: flex;
+      flex-direction: column;
+      margin-left: 15px;
+
+      &__action {
+        font-size: 15px;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      &__price {
+        font-size: 14px;
+        color: var(--x-text-light);
+      }
+    }
+  }
+
+  &__date {
+    font-size: 14px;
+    color: var(--x-text-light);
+  }
+
+  &__result {
+    border-radius: 5px;
+    padding: 5px 10px;
+
+    &--made {
+      color: white;
+      background-color: var(--x-success);
+    }
+    &--lost {
+      color: white;
+      background-color: var(--x-fail);
+    }
+    &--up {
+      color: var(--x-success);
+      background-color: var(--x-success-light);
+    }
+    &--down {
+      color: var(--x-fail);
+      background-color: var(--x-fail-light);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 100%;
+    color: var(--x-text-darkgray);
+
+    &__action {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-right: 13px;
+      cursor: pointer;
+      height: 100%;
+
+      &--toggled {
+        color: var(--x-action);
+      }
+
+      ion-icon {
+        font-size: 20px;
+        margin-right: 7px;
+      }
+    }
+  }
+}
+
+.alert-details {
+  height: 100%;
+  &__scroll {
+    overflow: auto;
+
+    @media (max-width: 991px) {
+      overflow: initial;
+    }
+
+    padding-right: 20px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0px 140px 20px;
+    height: 70vh;
+    border-left: 1px solid var(--x-bg-gray);
+
+    @media (max-width: 991px) {
+      height: 66vh;
+    }
+  }
+
+  &__description {
+    &__title {
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__graph {
+    border: 1px solid var(--x-bg-gray);
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 5px;
+  }
+
+  &__comments {
+    margin-top: 40px;
+  }
+
+  &__comment-mobile {
+    margin-top: 40px;
+    padding-bottom: 40px;
+  }
+}
+
+.comment {
+  position: absolute;
+  height: 145px;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+
+  &__grid-el {
+    height: 100%;
+  }
+
+  &__container {
+    height: 100%;
+    padding: 0 15px 20px 20px;
+  }
+}

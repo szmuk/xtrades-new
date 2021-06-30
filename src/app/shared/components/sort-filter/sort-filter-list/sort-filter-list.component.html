@@ -1,0 +1,6 @@
+<div class="options">
+  <div *ngFor="let option of options" class="options__item" (click)="select(option)">
+    <div>{{option.value}}</div>
+    <ion-icon *ngIf="option.key === selected?.key" name="checkmark-outline"></ion-icon>
+  </div>
+</div>
