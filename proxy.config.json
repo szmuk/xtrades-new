@@ -1,0 +1,8 @@
+{
+    "/api/*": {
+        "target": "https://functions.alpha.xtrades.net",
+        "changeOrigin": true,
+        "secure": true,
+        "logLevel": "debug"
+    }
+}
