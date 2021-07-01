@@ -1,9 +1,7 @@
 import { Location } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
-// const discordOauth2 = require('discord-oauth2');
-// import * as discordOauth2 from 'discord-oauth2';
 import * as Client from 'discord-oauth2-api';
 import { tap } from 'rxjs/operators';
 
@@ -15,10 +13,8 @@ export class AuthenticationService {
   authenticated = false;
 
   discordResponseCode: string;
-  discordToken: string;
-  user: any;
 
-  apiUrl = 'https://api.xtrades.net/api/v1/';
+  auth: TemporaryXtradesAuthObject;
 
   constructor(
     private location: Location,
@@ -29,20 +25,30 @@ export class AuthenticationService {
   }
 
   isAuthenticated(route: ActivatedRouteSnapshot): boolean {
+    this.postTest()
     if (this.authenticated) {
       return true;
     } else {
-      this.handleDiscordResponse(route);
+      const auth = localStorage.getItem('x-trades-auth');
 
-      if (this.discordResponseCode) {
-        this.discordAuth();
+      if (auth) {
+        this.auth = JSON.parse(auth);
+        this.authenticated = true;
         return true;
       } else {
-        // eslint-disable-next-line max-len
-        window.location.href = `https://discord.com/api/oauth2/authorize?client_id=767764715388403732&redirect_uri=${window.location.origin}/signin-discord&response_type=code&scope=identify%20email`;
-        return false;
+        this.handleDiscordResponse(route);
+
+        if (this.discordResponseCode) {
+          this.authenticateWithDiscordCode();
+          return true;
+        } else {
+          // eslint-disable-next-line max-len
+          window.location.href = `https://discord.com/api/oauth2/authorize?client_id=767764715388403732&redirect_uri=${window.location.origin}/signin-discord&response_type=code&scope=identify%20email`;
+          return false;
+        }
       }
     }
+
   }
 
   handleDiscordResponse(route: ActivatedRouteSnapshot) {
@@ -57,10 +63,11 @@ export class AuthenticationService {
       const url = this.router.createUrlTree([], { relativeTo: this.route, queryParams: { code: null }, queryParamsHandling: 'merge' }).toString();
       this.location.go(url);
     });
-
   }
 
-  discordAuth() {
+  authenticateWithDiscordCode() {
+    this.auth = new TemporaryXtradesAuthObject();
+
     const client = new Client({
       clientID: '767764715388403732',
       clientSecret: 'B7RwypXwb5mpabVM0HAqthrabujQENMS',
@@ -69,40 +76,57 @@ export class AuthenticationService {
     });
 
     client.getAccessToken(this.discordResponseCode).then(token => {
-      this.discordToken = token.accessToken;
-      console.log('Discord token', token);
+      this.auth.discordToken = token.accessToken;
 
-      client.getUser(this.discordToken).then(user => {
-        console.log(user);
-        this.user = user;
-        this.postTest();
+      client.getUser(this.auth.discordToken).then(user => {
+        this.auth.user = user;
+        localStorage.setItem('x-trades-auth', JSON.stringify(this.auth));
+
+        this.getUserData();
+        this.getToken();
       });
     });
   }
 
+  getUserData() {
+    // eslint-disable-next-line max-len
+    const url = `/functions/api/v1/user/registration?discordUserId=${this.auth.user.id}&discordUsername=${this.auth.user.username}&email=${this.auth.user.email}&state=/`;
+
+    this.http.post(url, {}, { headers: { 'x-functions-key': '9cAee/4ekOMeUzMDiF1skPZi1QmjhsrvX9l9FY2rgyGT/bIGEqgxBQ==' } })
+      .toPromise().then(console.log);
+  }
+
+  getToken() {
+    this.http.get(`/api/v1/token?discordUserId=${this.auth.user.id}&email=${this.auth.user.email}`).toPromise().then(console.log);
+  }
+
+
+
+
+
   postTest() {
 
-    // eslint-disable-next-line max-len
-    const url = `/functions/api/v1/user/registration?discordUserId=${this.user.id}&discordUsername=${this.user.username}&email=${this.user.email}&state=/`;
-
-
-    this.http.post(url, {}, {
-      headers: { 'x-functions-key': '9cAee/4ekOMeUzMDiF1skPZi1QmjhsrvX9l9FY2rgyGT/bIGEqgxBQ==' },
-    }).pipe(
+    this.http.get('/api/v1/alerts/trending')
+    .pipe(
       tap(x => {
-        console.log(x);
+        console.log(x)
       }
       )
     ).subscribe();
 
-    this.http.get(`/api/v1/token?discordUserId=${this.user.id}&email=${this.user.email}`)
-      .pipe(
-        tap(x => {
-          console.log(x);
-        }
-        )
-      ).subscribe();
+  this.http.get('/api/v1/alerts?page=1&selectedFilter=0&timeframe=0')
+    .pipe(
+      tap(x => {
+        console.log(x)
+      }
+      )
+    ).subscribe();
   }
 
 }
 
+// TODO: figure out proper way of authenticating
+export class TemporaryXtradesAuthObject {
+  discordToken: string;
+  user: any;
+}
