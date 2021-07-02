@@ -1,29 +1,45 @@
-import { Company } from './company';
-import { Person } from './person';
-import { Comment } from './comment';
 
 export class Alert {
-  id: number;
-  company: Company;
-  user: Person;
-  closed: Date;
-  opened: Date;
-  type: string;
-  gainLoss: number;
-  likesCount: number;
-  liked: boolean;
-  savedCount: number;
-  saved: boolean;
-  commentsCount: number;
-  commented: boolean;
-  top: boolean;
-  price: number;
-  currency: string;
+  actualPriceAtTimeOfAlert: number;
+  alertSentimentDislikeCount: number;
+  alertSentimentHasDisliked: boolean;
+  alertSentimentHasLiked: boolean;
+  alertSentimentLikeCount: number;
+  alertSentimentTotal: number;
+  alertClosedDate: Date;
+  audit: Audit;
+  diffCalc: number;
+  direction: number;
+  flagWasReviewed: boolean;
+  formattedDetails: string;
+  formattedLength: string;
+  formattedLengthShort: string;
+  id: string;
+  isAnalyst: boolean;
+  isExperimental: boolean;
+  isFlagged: boolean;
+  isProfitableTrade: boolean;
+  isShort: boolean;
+  isSwing: boolean;
+  lastCheckedPrice: number;
+  lastKnownPercentProfit: number;
+  originalMessage: string;
+  pricePaid: number;
+  profitPossiblePercent: number;
+  result: number;
+  risk: number;
+  shouldSendNotification: boolean;
+  showExpansion: boolean;
+  side: number;
+  status: number;
+  symbol: string;
+  timeOfEntryAlert: Date;
+  type: number;
+  userId: string;
+  userName: string;
+  xscore: number;
 }
 
-export class AlertDetailed extends Alert {
-  descriptionTitle: string;
-  descriptionHtml: string;
-  graphUrl: string;
-  comments: Comment[];
+export class Audit {
+  createdDate: Date;
 }

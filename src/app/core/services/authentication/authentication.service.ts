@@ -25,7 +25,7 @@ export class AuthenticationService {
   }
 
   isAuthenticated(route: ActivatedRouteSnapshot): boolean {
-    this.postTest()
+    this.postTest();
     if (this.authenticated) {
       return true;
     } else {
@@ -109,7 +109,7 @@ export class AuthenticationService {
     this.http.get('/api/v1/alerts/trending')
     .pipe(
       tap(x => {
-        console.log(x)
+        console.log(x);
       }
       )
     ).subscribe();
@@ -117,7 +117,7 @@ export class AuthenticationService {
   this.http.get('/api/v1/alerts?page=1&selectedFilter=0&timeframe=0')
     .pipe(
       tap(x => {
-        console.log(x)
+        console.log(x);
       }
       )
     ).subscribe();

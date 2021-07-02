@@ -22,14 +22,6 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
 
   sortOptions: SortFilterComponentOption[] = [
     {
-      key: 'opened',
-      value: 'Opened'
-    },
-    {
-      key: 'closed',
-      value: 'Closed'
-    },
-    {
       key: 'price',
       value: 'Price'
     },
@@ -62,9 +54,13 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
     this.selectedFilterOption = this.filterOptions.find(x => x.key === 'all');
 
     this.subscription.add(
-      this.alertsQuery.selectAll().pipe(filter(x => !!x && x.length > 0)).subscribe(alerts => {
+      this.alertsQuery.selectAll().pipe(filter(x => x?.length > 0)).subscribe((alerts: Alert[]) => {
         this.alertsList = alerts;
         this.filterChanged();
+        console.log('alerts', alerts);
+
+        //temp
+        this.sortedFilteredAlertsList = this.alertsList;
       }));
 
     this.alertsService.getAlerts();
@@ -74,13 +70,14 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  // TODO: set actual filters
   filterChanged() {
     switch (this.selectedFilterOption.key) {
       case 'top':
-        this.sortedFilteredAlertsList = this.alertsList.filter(x => x.top);
+        this.sortedFilteredAlertsList = this.alertsList.filter(x => x.xscore > 60);
         break;
       case 'following':
-        this.sortedFilteredAlertsList = this.alertsList.filter(x => x.user.following);
+        this.sortedFilteredAlertsList = [];
         break;
       case 'all':
       default:
@@ -92,17 +89,11 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
 
   sortChanged() {
     switch (this.selectedSortOption?.key) {
-      case 'opened':
-        this.sortedFilteredAlertsList = this.sortedFilteredAlertsList.sort((a, b) => a.opened < b.opened ? 1 : -1);
-        break;
-      case 'closed':
-        this.sortedFilteredAlertsList = this.sortedFilteredAlertsList.sort((a, b) => a.closed < b.closed ? 1 : -1);
-        break;
       case 'price':
-        this.sortedFilteredAlertsList = this.sortedFilteredAlertsList.sort((a, b) => a.price < b.price ? 1 : -1);
+        this.sortedFilteredAlertsList = this.sortedFilteredAlertsList.sort((a, b) => a.pricePaid < b.pricePaid ? 1 : -1);
         break;
       case 'gain':
-        this.sortedFilteredAlertsList = this.sortedFilteredAlertsList.sort((a, b) => a.gainLoss < b.gainLoss ? 1 : -1);
+        this.sortedFilteredAlertsList = this.sortedFilteredAlertsList.sort((a, b) => a.diffCalc < b.diffCalc ? 1 : -1);
         break;
       default:
         this.sortedFilteredAlertsList = this.sortedFilteredAlertsList;

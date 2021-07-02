@@ -3,7 +3,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { Alert, AlertDetailed } from 'src/app/core/models/alert';
+import { Alert } from 'src/app/core/models/alert';
 import { AlertsQuery } from 'src/app/core/state/alerts/alerts.query';
 import { AlertsService } from 'src/app/core/state/alerts/alerts.service';
 
@@ -12,8 +12,6 @@ import { AlertsService } from 'src/app/core/state/alerts/alerts.service';
   styleUrls: ['./alert-modal.component.scss'],
 })
 export class AlertModalComponent implements OnInit, OnDestroy {
-
-  alert: AlertDetailed;
 
   subscription = new Subscription();
 
@@ -25,13 +23,6 @@ export class AlertModalComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     const alertId = this.navParams.data.alert.id;
-
-    this.subscription.add(
-      this.alertsQuery.select(x => x.detailedAlert).pipe(filter(x => !!x)).subscribe((detailedAlert: AlertDetailed) => {
-        this.alert = detailedAlert;
-      }));
-
-    this.alertsService.getAlertDetails(alertId);
   }
 
   ngOnDestroy() {

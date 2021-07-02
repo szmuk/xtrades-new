@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PersonDetailed } from 'src/app/core/models/person';
-import { PeopleService } from 'src/app/core/services/people/people.serice';
 
 @Component({
   selector: 'app-trader-info',
@@ -13,11 +12,7 @@ export class TraderInfoComponent implements OnInit {
 
   trader: PersonDetailed;
 
-  constructor(private peopleService: PeopleService) { }
 
   ngOnInit() {
-    this.peopleService.getPersonDetails(this.traderId).then(x => {
-      this.trader = x;
-    });
   }
 }
