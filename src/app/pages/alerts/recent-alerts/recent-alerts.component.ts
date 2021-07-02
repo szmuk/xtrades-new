@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Alert } from 'src/app/core/models/alert';
@@ -10,6 +10,7 @@ import { SortFilterComponentOption } from 'src/app/shared/components/sort-filter
   selector: 'app-recent-alerts',
   templateUrl: './recent-alerts.component.html',
   styleUrls: ['./recent-alerts.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecentAlertsComponent implements OnInit, OnDestroy {
 
@@ -50,6 +51,7 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
 
   constructor(
     private alertsService: AlertsService,
+    private changeDetector: ChangeDetectorRef,
     private alertsQuery: AlertsQuery) { }
 
   ngOnInit() {
@@ -99,6 +101,7 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
         this.sortedFilteredAlertsList = this.sortedFilteredAlertsList;
         break;
     }
+    this.changeDetector.markForCheck();
   }
 
 }

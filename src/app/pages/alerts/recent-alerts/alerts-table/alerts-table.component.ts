@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import * as moment from 'moment';
 import { Alert } from 'src/app/core/models/alert';
@@ -9,6 +9,7 @@ import { AlertModalComponent, AlertModalInput } from 'src/app/shared/components/
   selector: 'app-alerts-table',
   templateUrl: './alerts-table.component.html',
   styleUrls: ['./alerts-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertsTableComponent implements OnInit {
 
@@ -30,6 +31,10 @@ export class AlertsTableComponent implements OnInit {
     } else {
       return momentDate.format('DD/MM');
     }
+  }
+
+  trackByFn(index, item) {
+    return item.id;
   }
 
   like(event, alert: Alert) {
