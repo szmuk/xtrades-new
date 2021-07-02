@@ -4,9 +4,11 @@ import { Alert } from '../../models/alert';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface AlertsState extends EntityState<Alert> {
+  initialized: boolean;
 }
 
 const initialState = {
+  initialized: false
 };
 
 @Injectable({ providedIn: 'root' })

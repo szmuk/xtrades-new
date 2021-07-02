@@ -11,7 +11,7 @@ export class HttpService {
   }
 
   get(target: ApiTarget, url: string) {
-    return this.httpClient.get('/api/v1/alerts?page=1&selectedFilter=0&timeframe=0', { headers: this.getHeaders(target)});
+    return this.httpClient.get(url, { headers: this.getHeaders(target)});
   }
 
   post(target: ApiTarget, url: string, body: any) {

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Alert } from 'src/app/core/models/alert';
@@ -48,7 +48,9 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(private alertsService: AlertsService, private alertsQuery: AlertsQuery) { }
+  constructor(
+    private alertsService: AlertsService,
+    private alertsQuery: AlertsQuery) { }
 
   ngOnInit() {
     this.selectedFilterOption = this.filterOptions.find(x => x.key === 'all');
@@ -57,13 +59,11 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
       this.alertsQuery.selectAll().pipe(filter(x => x?.length > 0)).subscribe((alerts: Alert[]) => {
         this.alertsList = alerts;
         this.filterChanged();
-        console.log('alerts', alerts);
-
-        //temp
-        this.sortedFilteredAlertsList = this.alertsList;
       }));
 
-    this.alertsService.getAlerts();
+      if (!this.alertsQuery.getValue().initialized) {
+        this.alertsService.getAlerts();
+      }
   }
 
   ngOnDestroy() {

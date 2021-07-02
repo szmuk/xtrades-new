@@ -24,6 +24,7 @@ export class AlertsService {
       map((res: any) => res.data),
       tap(data => {
         this.alertsStore.set(data);
+        this.alertsStore.update({ initialized: true });
       })
     ).subscribe();
   }

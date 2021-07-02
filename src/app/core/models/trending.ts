@@ -1,10 +1,8 @@
-import { Company } from './company';
-
 export class Trending {
-  id: number;
-  company: Company;
-  alertsCount: number;
-  bullishPercent: number;
-  bearishPercent: number;
-  date: Date;
+  count: number;
+  isBearish: boolean;
+  isBullish: boolean;
+  percent: number;
+  symbol: string;
+  time: string;
 }

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import * as Client from 'discord-oauth2-api';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +24,6 @@ export class AuthenticationService {
   }
 
   isAuthenticated(route: ActivatedRouteSnapshot): boolean {
-    this.postTest();
     if (this.authenticated) {
       return true;
     } else {
@@ -99,30 +97,6 @@ export class AuthenticationService {
   getToken() {
     this.http.get(`/api/v1/token?discordUserId=${this.auth.user.id}&email=${this.auth.user.email}`).toPromise().then(console.log);
   }
-
-
-
-
-
-  postTest() {
-
-    this.http.get('/api/v1/alerts/trending')
-    .pipe(
-      tap(x => {
-        console.log(x);
-      }
-      )
-    ).subscribe();
-
-  this.http.get('/api/v1/alerts?page=1&selectedFilter=0&timeframe=0')
-    .pipe(
-      tap(x => {
-        console.log(x);
-      }
-      )
-    ).subscribe();
-  }
-
 }
 
 // TODO: figure out proper way of authenticating

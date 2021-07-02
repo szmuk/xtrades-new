@@ -3,11 +3,11 @@
   <div class="tile__header">
     <div class="tile__header__data">
 
-      <app-company-logo [company]="trending.company"></app-company-logo>
+      <app-company-logo></app-company-logo>
 
       <div class="tile__header__data__info">
-        <div class="tile__header__data__info__code">{{trending.company.code}}</div>
-        <div class="tile__header__data__info__name">{{trending.company.name}}</div>
+        <div class="tile__header__data__info__code">{{trending.symbol}}</div>
+        <div class="tile__header__data__info__name">{{trending.symbol}}</div>
       </div>
     </div>
     <ion-icon name="ellipsis-horizontal" class="tile__header__icon"></ion-icon>
@@ -20,7 +20,7 @@
 
   <!-- FOOTER -->
   <div class="tile__footer">
-    <div class="tile__footer__alerts">{{trending.alertsCount}} alerts</div>
+    <div class="tile__footer__alerts">{{trending.count}} alerts</div>
     <div class="tile__footer__trend">
       <span [class.tile__footer__trend__bullish]="label === 'bullish'"
         [class.tile__footer__trend__bearish]="label === 'bearish'">{{percent}}% </span>

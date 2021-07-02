@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Trending } from 'src/app/core/models/trending';
@@ -42,13 +41,15 @@ export class TrendingTickersComponent implements OnInit, OnDestroy {
     this.selectedSortOption = this.sortOptions.find(x => x.key === 'month');
 
     this.subscription.add(
-      this.trendingQuery.selectAll().pipe(filter(x => !!x)).subscribe(trending => {
+      this.trendingQuery.selectAll().pipe(filter(x => !!x)).subscribe((trending: Trending[]) => {
         this.trendingList = trending;
         this.sortChanged();
       })
     );
 
-    this.trendingService.getTrending();
+    if (!this.trendingQuery.getValue().initialized) {
+      this.trendingService.getTrending();
+    }
   }
 
   ngOnDestroy() {
@@ -56,21 +57,23 @@ export class TrendingTickersComponent implements OnInit, OnDestroy {
   }
 
   sortChanged() {
-    let daysToSubstract: number;
+    this.filteredTrendingList = this.trendingList;
 
-    switch (this.selectedSortOption.key) {
-      case 'today':
-        daysToSubstract = 1;
-        break;
-      case 'week':
-        daysToSubstract = 7;
-        break;
-      case 'month':
-        daysToSubstract = 30;
-        break;
-    }
+    // let daysToSubstract: number;
 
-    this.filteredTrendingList = this.trendingList.filter(x => moment(x.date).isAfter(moment().subtract(daysToSubstract, 'days')));
+    // switch (this.selectedSortOption.key) {
+    //   case 'today':
+    //     daysToSubstract = 1;
+    //     break;
+    //   case 'week':
+    //     daysToSubstract = 7;
+    //     break;
+    //   case 'month':
+    //     daysToSubstract = 30;
+    //     break;
+    // }
+
+    // this.filteredTrendingList = this.trendingList.filter(x => moment(x.date).isAfter(moment().subtract(daysToSubstract, 'days')));
   }
 
 }
