@@ -1,7 +1,7 @@
 <div class="table">
 
   <ion-grid>
-    <ion-virtual-scroll [items]="alerts" approxItemHeight="73px">
+    <ion-virtual-scroll [items]="alerts" approxItemHeight="73px" [trackBy]="trackByFn">
         <ion-row *virtualItem="let alert; let itemBounds = bounds;" class="table__row" [class.table__row--closed]="alert.alertClosedDate"
           (click)="openAlert(alert)">
     
