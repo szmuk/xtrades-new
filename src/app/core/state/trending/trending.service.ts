@@ -4,8 +4,6 @@ import { ApiTarget, HttpService } from '../../services/http/http.service';
 import { TrendingQuery } from './trending.query';
 import { TrendingStore } from './trending.store';
 
-
-
 @Injectable({
   providedIn: 'root'
 })

@@ -41,7 +41,7 @@ export class TrendingTickersComponent implements OnInit, OnDestroy {
     this.selectedSortOption = this.sortOptions.find(x => x.key === 'month');
 
     this.subscription.add(
-      this.trendingQuery.selectAll().pipe(filter(x => !!x)).subscribe((trending: Trending[]) => {
+      this.trendingQuery.selectAll().subscribe((trending: Trending[]) => {
         this.trendingList = trending;
         this.sortChanged();
       })

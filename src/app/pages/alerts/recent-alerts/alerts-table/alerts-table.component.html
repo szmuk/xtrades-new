@@ -1,6 +1,8 @@
 <div class="table">
 
   <ion-grid>
+
+  <!-- LOADING INDICATOR -->
   <ng-container *ngIf="loading">
     <ion-row *ngFor="let i of [].constructor(10)" class="table__row table__row--loading loading-line">
     </ion-row>
@@ -8,7 +10,13 @@
 
 
   <ng-container *ngIf="!loading">
-    <ion-virtual-scroll [items]="alerts" approxItemHeight="73px" [trackBy]="trackByFn">
+    <!-- NO DATA PLACEHOLDER -->
+    <ion-row *ngIf="alerts.length === 0">
+      No alerts to show.
+    </ion-row>
+
+    <!-- ALERTS TABLE -->
+    <ion-virtual-scroll *ngIf="alerts.length > 0" [items]="alerts" approxItemHeight="73px" [trackBy]="trackByFn">
         <ion-row *virtualItem="let alert; let itemBounds = bounds;" class="table__row" [class.table__row--closed]="alert.alertClosedDate"
           (click)="openAlert(alert)">
     

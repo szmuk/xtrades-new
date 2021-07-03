@@ -29,7 +29,6 @@ export class AlertsService {
         this.alertsStore.setLoading(false);
       }),
       catchError(err => {
-        console.log('adam err', err);
         this.alertsStore.setLoading(false);
         this.alertsStore.set([]);
         return of(null);

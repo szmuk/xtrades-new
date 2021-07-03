@@ -10,7 +10,7 @@ const initialState = {
 };
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'trending' })
+@StoreConfig({ name: 'trending', idKey: 'symbol' })
 export class TrendingStore extends EntityStore<TrendingState, Trending> {
   constructor() {
     super(initialState);
