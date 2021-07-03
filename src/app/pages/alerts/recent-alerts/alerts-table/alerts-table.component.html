@@ -1,6 +1,13 @@
 <div class="table">
 
   <ion-grid>
+  <ng-container *ngIf="loading">
+    <ion-row *ngFor="let i of [].constructor(10)" class="table__row table__row--loading loading-line">
+    </ion-row>
+  </ng-container>
+
+
+  <ng-container *ngIf="!loading">
     <ion-virtual-scroll [items]="alerts" approxItemHeight="73px" [trackBy]="trackByFn">
         <ion-row *virtualItem="let alert; let itemBounds = bounds;" class="table__row" [class.table__row--closed]="alert.alertClosedDate"
           (click)="openAlert(alert)">
@@ -33,7 +40,7 @@
                   {{alert.alertClosedDate ? 'Sold' : 'Bought'}} {{alert.symbol}} shares
                 </div>
                 <div class="table__action__info__price">
-                  @ USD{{alert.pricePaid}}
+                  @ USD {{alert.pricePaid}}
                 </div>
               </div>
             </div>
@@ -114,6 +121,7 @@
     
         </ion-row>
     </ion-virtual-scroll>
+  </ng-container>
 
   </ion-grid>
 

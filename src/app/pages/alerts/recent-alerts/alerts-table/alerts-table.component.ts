@@ -14,6 +14,7 @@ import { AlertModalComponent, AlertModalInput } from 'src/app/shared/components/
 export class AlertsTableComponent implements OnInit {
 
   @Input() alerts: Alert[];
+  @Input() loading: boolean;
 
   constructor(private alertsService: AlertsService, private modalCtrl: ModalController) { }
 

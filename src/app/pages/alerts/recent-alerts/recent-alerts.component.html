@@ -3,7 +3,7 @@
   <div class="alerts__toolbar">
 
     <app-sort-filter class="alerts__toolbar__item" [display]="'bar'" [options]="filterOptions"
-      [(value)]="selectedFilterOption" (valueChange)="filterChanged()">
+      [value]="selectedFilterOption" (valueChange)="filterChanged($event)">
     </app-sort-filter>
 
     <app-sort-filter class="alerts__toolbar__item" [options]="sortOptions" [(value)]="selectedSortOption"
@@ -13,7 +13,7 @@
   </div>
 
   <div class="alerts__table">
-    <app-alerts-table [alerts]="sortedFilteredAlertsList"></app-alerts-table>
+    <app-alerts-table [alerts]="sortedFilteredAlertsList" [loading]="loading"></app-alerts-table>
   </div>
 
 </div>

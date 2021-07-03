@@ -19,12 +19,14 @@ export class AlertsService {
     private alertsQuery: AlertsQuery) {
   }
 
-  getAlerts(): any {
-    return this.httpService.get(ApiTarget.api, '/api/v1/alerts?page=1&selectedFilter=0&timeframe=0').pipe(
+  getAlerts(filter: string): any {
+    this.alertsStore.setLoading(true);
+    return this.httpService.get(ApiTarget.api, `/api/v1/alerts?page=1&selectedFilter=${filter}&timeframe=0`).pipe(
       map((res: any) => res.data),
       tap(data => {
         this.alertsStore.set(data);
         this.alertsStore.update({ initialized: true });
+        this.alertsStore.setLoading(false);
       })
     ).subscribe();
   }

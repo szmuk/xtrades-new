@@ -1,15 +1,15 @@
-ion-header::after {
-  background-image: none;
-  border-bottom: 1px solid var(--x-bg-gray);
-}
-
 .header {
   padding: 0 30px;
+  border-bottom: 1px solid var(--x-bg-gray);
 
   ::ng-deep {
     .header-background {
       background: white;
     }
+  }
+
+  &__toolbar {
+    --border-width: 0 !important;
   }
 
   @media (max-width: 767px) {
@@ -23,7 +23,6 @@ ion-header::after {
 
   &::after {
     background-image: none;
-    border-bottom: 1px solid var(--x-bg-gray);
   }
 
   &__container {
