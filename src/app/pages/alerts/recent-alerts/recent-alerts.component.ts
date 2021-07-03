@@ -59,7 +59,7 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
     this.selectedFilterOption = this.filterOptions.find(x => x.key === '0');
 
     this.subscription.add(
-      this.alertsQuery.selectAll().pipe(filter(x => x?.length > 0)).subscribe((alerts: Alert[]) => {
+      this.alertsQuery.selectAll().subscribe((alerts: Alert[]) => {
         this.alertsList = alerts;
         this.sortedFilteredAlertsList = alerts;
         this.sortChanged();
@@ -68,6 +68,7 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
       this.subscription.add(
         this.alertsQuery.selectLoading().subscribe((loading: boolean) => {
           this.loading = loading;
+          this.changeDetector.markForCheck();
         }));
 
       // TODO: if signal-r used, probably no need to load on every page load

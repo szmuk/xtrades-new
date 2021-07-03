@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash';
 import * as moment from 'moment';
 import { of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Alert } from '../../models/alert';
 import { ApiTarget, HttpService } from '../../services/http/http.service';
 import { AlertsQuery } from './alerts.query';
@@ -27,6 +27,12 @@ export class AlertsService {
         this.alertsStore.set(data);
         this.alertsStore.update({ initialized: true });
         this.alertsStore.setLoading(false);
+      }),
+      catchError(err => {
+        console.log('adam err', err);
+        this.alertsStore.setLoading(false);
+        this.alertsStore.set([]);
+        return of(null);
       })
     ).subscribe();
   }
