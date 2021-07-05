@@ -1,0 +1,20 @@
+{
+  "workbench.iconTheme": "vscode-great-icons",
+  "window.zoomLevel": 0,
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "angular.experimental-ivy": true,
+  "eslint.format.enable": true,
+  "tslint.jsEnable": true,
+  "eslint.alwaysShowStatus": true,
+  "eslint.codeAction.showDocumentation": {
+    "enable": true
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript"
+  ]
+}
