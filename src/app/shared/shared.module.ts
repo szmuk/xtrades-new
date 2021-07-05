@@ -5,10 +5,12 @@ import { IonicModule } from '@ionic/angular';
 import { ComponentsModule } from './components/components.module';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { LazyImgDirective } from './directives/img-lazy-load/img-lazy-load.directive';
 
 
 @NgModule({
   declarations: [
+    LazyImgDirective,
   ],
   imports: [
     ComponentsModule,
@@ -20,6 +22,7 @@ import { MenuComponent } from './components/menu/menu.component';
     ComponentsModule,
     MenuComponent,
     HeaderComponent,
+    LazyImgDirective,
     CommonModule,
     IonicModule,
     RouterModule,
