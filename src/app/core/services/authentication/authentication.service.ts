@@ -2,6 +2,7 @@ import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { AppStore } from '@core/state/app/app.store';
 import * as Client from 'discord-oauth2-api';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class AuthenticationService {
   constructor(
     private location: Location,
     private router: Router,
+    private appStore: AppStore,
     private http: HttpClient,
     private route: ActivatedRoute) {
 
@@ -31,7 +33,9 @@ export class AuthenticationService {
 
       if (auth) {
         this.auth = JSON.parse(auth);
+        this.appStore.update({ auth: this.auth });
         this.authenticated = true;
+
         return true;
       } else {
         this.handleDiscordResponse(route);
@@ -63,7 +67,7 @@ export class AuthenticationService {
     });
   }
 
-  authenticateWithDiscordCode() {
+  async authenticateWithDiscordCode() {
     this.auth = new TemporaryXtradesAuthObject();
 
     const client = new Client({
@@ -73,29 +77,38 @@ export class AuthenticationService {
       redirectURI: 'https://localhost:5001/signin-discord',
     });
 
-    client.getAccessToken(this.discordResponseCode).then(token => {
-      this.auth.discordToken = token.accessToken;
+    const discordToken: any = await client.getAccessToken(this.discordResponseCode);
+    this.auth.discordToken = discordToken.accessToken;
+    console.log('Discord token', discordToken);
 
-      client.getUser(this.auth.discordToken).then(user => {
-        this.auth.user = user;
-        localStorage.setItem('x-trades-auth', JSON.stringify(this.auth));
+    const discordUser = await client.getUser(this.auth.discordToken);
+    this.auth.user = discordUser;
+    console.log('Discord user', discordUser);
 
-        this.getUserData();
-        this.getToken();
-      });
-    });
+    // TODO: use token
+    this.getToken();
+
+    const registerApiUserResponse = await this.getUserData().toPromise() as any;
+    console.log('Register api response', registerApiUserResponse);
+    this.auth.registerApiUser = registerApiUserResponse;
+
+    localStorage.setItem('x-trades-auth', JSON.stringify(this.auth));
+    this.appStore.update({ auth: this.auth });
   }
 
   getUserData() {
     // eslint-disable-next-line max-len
     const url = `/functions/api/v1/user/registration?discordUserId=${this.auth.user.id}&discordUsername=${this.auth.user.username}&email=${this.auth.user.email}&state=/`;
 
-    this.http.post(url, {}, { headers: { 'x-functions-key': '9cAee/4ekOMeUzMDiF1skPZi1QmjhsrvX9l9FY2rgyGT/bIGEqgxBQ==' } })
-      .toPromise().then(console.log);
+    return this.http.post(url, {}, { headers: { 'x-functions-key': '9cAee/4ekOMeUzMDiF1skPZi1QmjhsrvX9l9FY2rgyGT/bIGEqgxBQ==' } });
   }
 
   getToken() {
-    this.http.get(`/api/v1/token?discordUserId=${this.auth.user.id}&email=${this.auth.user.email}`).toPromise().then(console.log);
+    this.http.get(`/api/v1/token?discordUserId=${this.auth.user.id}&email=${this.auth.user.email}`).toPromise().then(x => console.log(x));
+  }
+
+  getAuthentication() {
+    return this.auth;
   }
 }
 
@@ -103,4 +116,5 @@ export class AuthenticationService {
 export class TemporaryXtradesAuthObject {
   discordToken: string;
   user: any;
+  registerApiUser: {id: string; userId: string};
 }

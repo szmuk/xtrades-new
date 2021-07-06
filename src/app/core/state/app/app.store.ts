@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { TemporaryXtradesAuthObject } from '@core/services/authentication/authentication.service';
 import { Store, StoreConfig } from '@datorama/akita';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface AppState extends Store<AppState> {
   sideMenuCollapsed: boolean;
+  auth: TemporaryXtradesAuthObject;
 }
 
 const initialState = {
-  sideMenuCollapsed: false
+  sideMenuCollapsed: false,
+  auth: null
 };
 
 @Injectable({ providedIn: 'root' })

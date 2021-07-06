@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AppQuery } from '@core/state/app/app.query';
 import { PopoverController } from '@ionic/angular';
+import { Subscription } from 'rxjs';
 import { HeaderOptionsComponent } from './header-options/header-options.component';
 
 @Component({
@@ -11,9 +13,22 @@ export class HeaderComponent implements OnInit {
 
   @Input() title: string;
 
-  constructor(private popoverController: PopoverController) { }
+  userId: string;
 
-  ngOnInit() { }
+  subscription = new Subscription();
+
+  constructor(
+    private popoverController: PopoverController,
+    private appQuery: AppQuery) { }
+
+  ngOnInit() {
+    this.subscription.add(
+      this.appQuery.select(x => x.auth).subscribe(auth => {
+        this.userId = auth.registerApiUser.userId;
+      })
+    );
+
+  }
 
   async openOptions(ev) {
     const popover = await this.popoverController.create({

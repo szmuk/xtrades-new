@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Person } from 'src/app/core/models/person';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-avatar',
@@ -7,6 +7,19 @@ import { Person } from 'src/app/core/models/person';
   styleUrls: ['./avatar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AvatarComponent {
-  @Input() person: Person;
+export class AvatarComponent implements OnInit {
+
+  @Input() profileId: string;
+  @Input() alertsCount = 0;
+  @Input() showBorder = true;
+
+  url: string;
+
+  ngOnInit() {
+    this.url = `${environment.storageBaseUrl}/avatars/${this.profileId}.png`;
+  }
+
+  error() {
+    this.url= 'assets/missing-avatar.png';
+  }
 }
