@@ -72,15 +72,12 @@
 
     &__avatar {
       flex-shrink: 0;
-      height: 50px;
-      width: 50px;
-      border-radius: 30px;
       margin-left: 20px;
       cursor: pointer;
 
       &:hover {
-        -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-        filter: grayscale(100%);
+        -webkit-filter: grayscale(50%); /* Safari 6.0 - 9.0 */
+        filter: grayscale(50%);
       }
     }
   }
