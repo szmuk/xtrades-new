@@ -44,20 +44,7 @@
     &__info {
       flex-grow: 1;
       flex-shrink: 1;
-      display: flex;
-      flex-direction: column;
       margin-left: 15px;
-
-      &__name {
-        font-size: 15px;
-        font-weight: 500;
-        margin-bottom: 5px;
-      }
-
-      &__login {
-        font-size: 13px;
-        color: var(--x-text-light);
-      }
     }
   }
 
@@ -71,19 +58,7 @@
     &__info {
       flex-grow: 1;
       flex-shrink: 1;
-      display: flex;
-      flex-direction: column;
       margin-left: 15px;
-
-      &__action {
-        font-size: 15px;
-        font-weight: 500;
-        margin-bottom: 5px;
-      }
-      &__price {
-        font-size: 13px;
-        color: var(--x-text-light);
-      }
     }
   }
 

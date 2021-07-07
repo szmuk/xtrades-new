@@ -26,14 +26,10 @@
     
               <app-avatar [profileId]="alert.userId" [alertsCount]="99"></app-avatar>
     
-              <div class="table__person__info">
-                <div class="table__person__info__name">
-                  {{alert.userName}}
-                </div>
-                <div class="table__person__info__login">
-                  @{{alert.userName}}
-                </div>
-              </div>
+              <app-text-duplex class="table__person__info">
+                <ng-container upper>{{alert.userName}}</ng-container>
+                <ng-container lower>{{'@' + alert.userName}}</ng-container>
+              </app-text-duplex>
             </div>
           </ion-col>
     
@@ -43,28 +39,21 @@
     
               <app-company-logo></app-company-logo>
     
-              <div class="table__action__info">
-                <div class="table__action__info__action">
-                  {{alert.alertClosedDate ? 'Sold' : 'Bought'}} {{alert.symbol}} shares
-                </div>
-                <div class="table__action__info__price">
-                  @ USD {{alert.pricePaid}}
-                </div>
-              </div>
+              <app-text-duplex class="table__action__info">
+                <ng-container upper>{{(alert.alertClosedDate ? 'Sold ' : 'Bought ') + alert.symbol + ' shares'}}</ng-container>
+                <ng-container lower>{{'@ USD ' + alert.pricePaid}}</ng-container>
+              </app-text-duplex>
+              
             </div>
           </ion-col>
     
           <!-- DATE -->
           <ion-col size="6" size-md="3" size-lg="2">
             <div class="table__date">
-              <div class="table__date__container">
-                <div class="table__date__closed" *ngIf="alert.alertClosedDate">
-                  Closed {{getDate(alert.alertClosedDate)}}
-                </div>
-                <div class="table__date__opened">
-                  Opened {{getDate(alert.timeOfEntryAlert)}}
-                </div>
-              </div>
+              <app-text-duplex>
+                <ng-container upper>{{'Closed ' + getDate(alert.alertClosedDate) }}</ng-container>
+                <ng-container lower>{{'Opened ' + getDate(alert.timeOfEntryAlert) }}</ng-container>
+              </app-text-duplex>
             </div>
           </ion-col>
     

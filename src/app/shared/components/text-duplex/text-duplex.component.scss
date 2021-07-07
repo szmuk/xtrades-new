@@ -1,0 +1,16 @@
+.duplex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__upper {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  &__lower {
+    font-size: 13px;
+    color: var(--x-text-light);
+  }
+}

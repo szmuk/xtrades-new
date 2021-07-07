@@ -14,6 +14,7 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 import { SortFilterListComponent } from './sort-filter/sort-filter-list/sort-filter-list.component';
 import { SortFilterComponent } from './sort-filter/sort-filter.component';
+import { TextDuplexComponent } from './text-duplex/text-duplex.component';
 import { TraderInfoComponent } from './trader-info/trader-info.component';
 
 @NgModule({
@@ -23,6 +24,7 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     HeaderComponent,
     SortFilterListComponent,
     CommentComponent,
+    TextDuplexComponent,
     HeaderOptionsComponent,
     CommentsListComponent,
     TraderInfoComponent,
@@ -39,6 +41,7 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     CommentComponent,
     CommentsListComponent,
     TraderInfoComponent,
+    TextDuplexComponent,
     AlertModalComponent,
     AvatarComponent,
     CommentsListItemComponent,
