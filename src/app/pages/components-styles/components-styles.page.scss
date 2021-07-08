@@ -1,0 +1,14 @@
+.colors {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__color {
+    margin: 10px;
+
+    &__tile {
+      height: 50px;
+      width: 160px;
+    }
+  }
+}

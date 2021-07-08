@@ -25,7 +25,13 @@ const routes: Routes = [
   },
   {
     path: 'xhub',
+    canActivate: [AuthenticationGuard],
     loadChildren: () => import('./pages/xhub/xhub.module').then(m => m.XhubPageModule)
+  },
+  {
+    path: 'components',
+    canActivate: [AuthenticationGuard],
+    loadChildren: () => import('./pages/components-styles/components-styles.module').then( m => m.ComponentsStylesPageModule)
   },
   {
     path: '**',
