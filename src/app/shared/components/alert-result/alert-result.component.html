@@ -1,0 +1,22 @@
+
+<div class="result">
+  <div class="result__container result__container--made"
+    *ngIf="alert.alertClosedDate && alert.diffCalc > 0">
+    Made {{alert.diffCalc}}%
+  </div>
+  <div class="result__container result__container--lost"
+    *ngIf="alert.alertClosedDate && alert.diffCalc < 0">
+    Lost {{(alert.diffCalc * -1)}}%
+  </div>
+  <div class="result__container result__container--up"
+    *ngIf="!alert.alertClosedDate && alert.diffCalc > 0">
+    Up {{alert.diffCalc}}%
+  </div>
+  <div class="result__container result__container--down"
+    *ngIf="!alert.alertClosedDate && alert.diffCalc < 0">
+    Down {{(alert.diffCalc * -1)}}%
+  </div>
+  <div class="result__container result__container--zero" *ngIf="alert.diffCalc === 0">
+    {{alert.diffCalc}}%
+  </div>
+</div>

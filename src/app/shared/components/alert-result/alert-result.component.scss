@@ -1,0 +1,23 @@
+.result {
+  &__container {
+    border-radius: 5px;
+    padding: 5px 10px;
+
+    &--made {
+      color: white;
+      background-color: var(--x-success);
+    }
+    &--lost {
+      color: white;
+      background-color: var(--x-fail);
+    }
+    &--up {
+      color: var(--x-success);
+      background-color: var(--x-success-light);
+    }
+    &--down {
+      color: var(--x-fail);
+      background-color: var(--x-fail-light);
+    }
+  }
+}

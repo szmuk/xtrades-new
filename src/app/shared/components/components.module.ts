@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
+import { AlertResultComponent } from './alert-result/alert-result.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { CommentComponent } from './comment/comment.component';
 import { CommentsListItemComponent } from './comments-list/comments-list-item/comments-list-item.component';
@@ -25,6 +26,7 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     SortFilterListComponent,
     CommentComponent,
     TextDuplexComponent,
+    AlertResultComponent,
     HeaderOptionsComponent,
     CommentsListComponent,
     TraderInfoComponent,
@@ -40,6 +42,7 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     CompanyLogoComponent,
     CommentComponent,
     CommentsListComponent,
+    AlertResultComponent,
     TraderInfoComponent,
     TextDuplexComponent,
     AlertModalComponent,
