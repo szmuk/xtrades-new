@@ -13,6 +13,7 @@ import { CompanyLogoComponent } from './company-logo/company-logo.component';
 import { HeaderOptionsComponent } from './header/header-options/header-options.component';
 import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
+import { SentimentComponent } from './sentiment/sentiment.component';
 import { SortFilterListComponent } from './sort-filter/sort-filter-list/sort-filter-list.component';
 import { SortFilterComponent } from './sort-filter/sort-filter.component';
 import { TextDuplexComponent } from './text-duplex/text-duplex.component';
@@ -24,6 +25,7 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     MenuComponent,
     HeaderComponent,
     SortFilterListComponent,
+    SentimentComponent,
     CommentComponent,
     TextDuplexComponent,
     AlertResultComponent,
@@ -44,6 +46,7 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     CommentsListComponent,
     AlertResultComponent,
     TraderInfoComponent,
+    SentimentComponent,
     TextDuplexComponent,
     AlertModalComponent,
     AvatarComponent,

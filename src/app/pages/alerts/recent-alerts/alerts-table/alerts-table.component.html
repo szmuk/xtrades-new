@@ -1,11 +1,10 @@
-<div class="table">
 
-  <ion-grid>
+<div class="table2">
 
   <!-- LOADING INDICATOR -->
   <ng-container *ngIf="loading">
-    <ion-row *ngFor="let i of [].constructor(10)" class="table__row table__row--loading loading-line">
-    </ion-row>
+    <div *ngFor="let i of [].constructor(10)" class="table2__row table2__row--loading loading-line">
+    </div>
   </ng-container>
 
 
@@ -17,10 +16,103 @@
 
     <!-- ALERTS TABLE -->
     <ion-virtual-scroll *ngIf="alerts.length > 0" [items]="alerts" approxItemHeight="73px" [trackBy]="trackByFn">
+        <div *virtualItem="let alert; let itemBounds = bounds;" class="table2__row" [class.table__row--closed]="alert.alertClosedDate"
+          (click)="openAlert(alert)">
+
+
+          <!-- AVATAR, NAME -->
+          <div class="table2__col person">
+      
+            <app-avatar [profileId]="alert.userId" [alertsCount]="99"></app-avatar>
+    
+            <app-text-duplex class="person__info">
+              <ng-container upper>{{alert.userName}}</ng-container>
+              <ng-container lower>{{'@' + alert.userName}}</ng-container>
+            </app-text-duplex>
+          </div>  
+
+
+          <!-- COMPANY, ACTION -->
+          <div class="table2__col action">
+    
+            <app-company-logo></app-company-logo>
+  
+            <app-text-duplex class="action__info">
+              <ng-container upper>{{(alert.alertClosedDate ? 'Sold ' : 'Bought ') + alert.symbol + ' shares'}}</ng-container>
+              <ng-container lower>{{'@ USD ' + alert.pricePaid}}</ng-container>
+            </app-text-duplex>
+              
+          </div>  
+
+          <!-- DATE -->
+          <div class="table2__col date">
+            <app-text-duplex>
+              <ng-container upper>{{'Closed ' + getDate(alert.alertClosedDate) }}</ng-container>
+              <ng-container lower>{{'Opened ' + getDate(alert.timeOfEntryAlert) }}</ng-container>
+            </app-text-duplex>
+          </div>  
+
+
+          <!-- STRATEGY -->
+          <div class="table2__col strategy">
+            <div class="table__type__text">
+              Swing
+            </div>
+          </div>  
+
+          <!-- RESULT -->
+          <div class="table2__col result">
+            <app-alert-result [alert]="alert"></app-alert-result>
+          </div>
+
+          <!-- SENTIMENT -->
+          <div class="table2__col sentiment">
+            <app-sentiment [alert]="alert"></app-sentiment>
+          </div>
+    
+
+
+
+        </div>
+    </ion-virtual-scroll>
+  </ng-container>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<div class="table">
+
+  <ion-grid>
+
+  <ng-container *ngIf="loading">
+    <ion-row *ngFor="let i of [].constructor(10)" class="table__row table__row--loading loading-line">
+    </ion-row>
+  </ng-container>
+
+
+  <ng-container *ngIf="!loading">
+    <ion-row *ngIf="alerts.length === 0">
+      No alerts to show.
+    </ion-row>
+
+    <ion-virtual-scroll *ngIf="alerts.length > 0" [items]="alerts" approxItemHeight="73px" [trackBy]="trackByFn">
         <ion-row *virtualItem="let alert; let itemBounds = bounds;" class="table__row" [class.table__row--closed]="alert.alertClosedDate"
           (click)="openAlert(alert)">
     
-          <!-- AVATAR, NAME -->
           <ion-col size="12" size-md="12" size-lg="2">
             <div class="table__person">
     
@@ -33,7 +125,6 @@
             </div>
           </ion-col>
     
-          <!-- COMPANY, ACTION -->
           <ion-col size="12" size-md="12" size-lg="3">
             <div class="table__action">
     
@@ -47,7 +138,6 @@
             </div>
           </ion-col>
     
-          <!-- DATE -->
           <ion-col size="6" size-md="3" size-lg="2">
             <div class="table__date">
               <app-text-duplex>
@@ -57,44 +147,20 @@
             </div>
           </ion-col>
     
-          <!-- TYPE -->
           <ion-col size="6" size-md="3" size-lg="1">
             <div class="table__type">
               <div class="table__type__text">
-                <!-- {{alert.type}} -->
                 Swing
               </div>
             </div>
           </ion-col>
     
-          <!-- RESULT -->
           <ion-col size="6" size-md="3" size-lg="2">
             <div class="table__result">
-              <div>
-                <div class="table__result__container table__result__container--made"
-                  *ngIf="alert.alertClosedDate && alert.diffCalc > 0">
-                  Made {{alert.diffCalc}}%
-                </div>
-                <div class="table__result__container table__result__container--lost"
-                  *ngIf="alert.alertClosedDate && alert.diffCalc < 0">
-                  Lost {{(alert.diffCalc * -1)}}%
-                </div>
-                <div class="table__result__container table__result__container--up"
-                  *ngIf="!alert.alertClosedDate && alert.diffCalc > 0">
-                  Up {{alert.diffCalc}}%
-                </div>
-                <div class="table__result__container table__result__container--down"
-                  *ngIf="!alert.alertClosedDate && alert.diffCalc < 0">
-                  Down {{(alert.diffCalc * -1)}}%
-                </div>
-                <div class="table__result__container table__result__container--zero" *ngIf="alert.diffCalc === 0">
-                  {{alert.diffCalc}}%
-                </div>
-              </div>
+              <app-alert-result [alert]="alert"></app-alert-result>
             </div>
           </ion-col>
     
-          <!-- ACTIONS -->
           <ion-col size="6" size-md="3" size-lg="2">
             <div class="table__actions">
               <div class="table__actions__action" [class.table__actions__action--toggled]="false"
@@ -122,4 +188,4 @@
 
   </ion-grid>
 
-</div>
+</div> -->

@@ -1,19 +1,18 @@
-.table {
-  background-color: var(--x-bg-lightgray);
-  border-radius: 20px;
-  padding: 15px;
-
-  @media (max-width: 991px) {
-    padding: 0px;
-  }
-
-  // ROW
+// TABLE
+.table2 {
   &__row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
     background-color: white;
     border-radius: 15px;
     margin: 10px 0;
     padding: 5px;
     cursor: pointer;
+    border: 1px solid var(--x-bg-gray);
 
     &--loading {
       height: 75px;
@@ -34,133 +33,72 @@
     }
   }
 
-  // PERSON
-  &__person {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
-
-    &__info {
-      flex-grow: 1;
-      flex-shrink: 1;
-      margin-left: 15px;
-    }
+  &__col {
+    flex-shrink: 0;
+    flex-grow: 0;
+    margin: 10px;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: center;
+    // height: 100%;
   }
+}
 
-  // ACTION
-  &__action {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
+// COLUMNS
 
-    &__info {
-      flex-grow: 1;
-      flex-shrink: 1;
-      margin-left: 15px;
-    }
+// PERSON
+.person {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  flex-basis: 200px;
+  flex-grow: 1;
+
+  &__info {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-left: 15px;
   }
+}
 
-  // DATE
-  &__date {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
+// ACTION
+.action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
+  flex-basis: 250px;
+  flex-grow: 1;
 
-    &__container {
-      flex-grow: 1;
-      flex-shrink: 1;
-      display: flex;
-      flex-direction: column;
-    }
-    &__closed {
-      font-size: 15px;
-      font-weight: 500;
-      margin-bottom: 5px;
-    }
-    &__opened {
-      font-size: 13px;
-      color: var(--x-text-light);
-    }
+  &__info {
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin-left: 15px;
   }
+}
 
-  // TYPE
-  &__type {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
+// DATE
+.date {
+  flex-basis: 130px;
+  flex-grow: 1;
+}
 
-    &__text {
-      flex-grow: 1;
-      flex-shrink: 1;
-      color: var(--x-text-light);
-      font-size: 15px;
-    }
-  }
+// STRATEGy
+.strategy {
+  flex-basis: 200px;
+  flex-grow: 4;
+}
 
-  // RESULT
-  &__result {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 100%;
-    font-size: 15px;
+// RESULT
+.result {
+  flex-basis: 120px;
+  flex-grow: 1;
+  display: flex;
+}
 
-    &__container {
-      border-radius: 5px;
-      padding: 5px 10px;
-
-      &--made {
-        color: white;
-        background-color: var(--x-success);
-      }
-      &--lost {
-        color: white;
-        background-color: var(--x-fail);
-      }
-      &--up {
-        color: var(--x-success);
-        background-color: var(--x-success-light);
-      }
-      &--down {
-        color: var(--x-fail);
-        background-color: var(--x-fail-light);
-      }
-    }
-  }
-
-  // ACTIONS
-  &__actions {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    height: 100%;
-    color: var(--x-text-darkgray);
-
-    &__action {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      padding: 7px 13px 7px 0;
-      cursor: pointer;
-      height: 100%;
-
-      &--toggled {
-        color: var(--x-action);
-      }
-
-      ion-icon {
-        font-size: 20px;
-        margin-right: 7px;
-
-        &:hover {
-          transition: all 0.1s ease;
-          opacity: 0.6;
-        }
-      }
-    }
-  }
+// SENTIMENT
+.sentiment {
+  flex-basis: 160px;
+  flex-grow: 1;
 }

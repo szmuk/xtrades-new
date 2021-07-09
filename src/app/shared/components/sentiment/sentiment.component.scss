@@ -1,0 +1,30 @@
+.sentiment {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  height: 100%;
+  color: var(--x-text-darkgray);
+
+  &__action {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 7px 13px 7px 0;
+    cursor: pointer;
+    height: 100%;
+
+    &--toggled {
+      color: var(--x-action);
+    }
+
+    ion-icon {
+      font-size: 20px;
+      margin-right: 7px;
+
+      &:hover {
+        transition: all 0.1s ease;
+        opacity: 0.6;
+      }
+    }
+  }
+}

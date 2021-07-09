@@ -19,6 +19,7 @@ export class AlertsTableComponent implements OnInit {
   constructor(private alertsService: AlertsService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
+
   }
 
   getDate(date: Date) {
