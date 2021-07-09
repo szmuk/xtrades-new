@@ -15,15 +15,14 @@
     </ion-row>
 
     <!-- ALERTS TABLE -->
-    <ion-virtual-scroll *ngIf="alerts.length > 0" [items]="alerts" approxItemHeight="73px" [trackBy]="trackByFn">
+    <ion-virtual-scroll *ngIf="alerts?.length > 0" [items]="alerts" approxItemHeight="85px" [trackBy]="trackByFn" [itemHeight]="itemHeightFn" >
         <div *virtualItem="let alert; let itemBounds = bounds;" class="table2__row" [class.table__row--closed]="alert.alertClosedDate"
           (click)="openAlert(alert)">
-
 
           <!-- AVATAR, NAME -->
           <div class="table2__col person">
       
-            <app-avatar [profileId]="alert.userId" [alertsCount]="99"></app-avatar>
+            <app-avatar [profileId]="alert.userId" [alertsCount]="alert.userMeta.xScore"></app-avatar>
     
             <app-text-duplex class="person__info">
               <ng-container upper>{{alert.userName}}</ng-container>

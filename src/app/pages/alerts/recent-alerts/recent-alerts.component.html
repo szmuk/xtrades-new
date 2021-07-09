@@ -14,6 +14,13 @@
 
   <div class="alerts__table">
     <app-alerts-table [alerts]="sortedFilteredAlertsList" [loading]="loading"></app-alerts-table>
+    
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Loading alerts...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
   </div>
 
 </div>

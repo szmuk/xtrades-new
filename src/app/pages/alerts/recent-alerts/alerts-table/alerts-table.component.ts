@@ -52,6 +52,10 @@ export class AlertsTableComponent implements OnInit {
     event.preventDefault();
   }
 
+  itemHeightFn(item, index) {
+    return 90;
+  }
+
   async openAlert(alert: Alert) {
 
     const data: AlertModalInput = {

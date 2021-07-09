@@ -36,10 +36,18 @@ export class Alert {
   timeOfEntryAlert: Date;
   type: number;
   userId: string;
+  userMeta: UserMeta;
   userName: string;
   xscore: number;
 }
 
 export class Audit {
   createdDate: Date;
+}
+
+export class UserMeta {
+  avatar: string;
+  userId: string;
+  username: string;
+  xScore: number;
 }

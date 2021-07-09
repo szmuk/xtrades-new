@@ -1,4 +1,5 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { IonInfiniteScroll } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Alert } from 'src/app/core/models/alert';
@@ -12,11 +13,15 @@ import { SortFilterComponentOption } from 'src/app/shared/components/sort-filter
   styleUrls: ['./recent-alerts.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RecentAlertsComponent implements OnInit, OnDestroy {
+export class RecentAlertsComponent implements AfterViewInit, OnDestroy {
 
-  sortedFilteredAlertsList: Alert[];
-  alertsList: Alert[];
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
+  sortedFilteredAlertsList: Alert[] = [];
+  alertsList: Alert[] = [];
   loading = false;
+
+  page = 1;
 
   subscription = new Subscription();
 
@@ -55,14 +60,20 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private alertsQuery: AlertsQuery) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.selectedFilterOption = this.filterOptions.find(x => x.key === '0');
+    this.infiniteScroll.disabled = true;
 
     this.subscription.add(
       this.alertsQuery.selectAll().subscribe((alerts: Alert[]) => {
         this.alertsList = alerts;
         this.sortedFilteredAlertsList = alerts;
-        this.sortChanged();
+        // this.sortChanged();
+        this.infiniteScroll.complete();
+        this.infiniteScroll.disabled = false;
+        console.log(this.infiniteScroll);
+        this.changeDetector.markForCheck();
+        console.log('loaded');
       }));
 
     this.subscription.add(
@@ -73,7 +84,7 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
 
 
     // TODO: if signal-r used, probably no need to load on every page load
-    this.alertsService.getAlerts('0');
+    this.alertsService.getAlerts('0', this.page);
   }
 
   ngOnDestroy() {
@@ -86,8 +97,9 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
       return;
     }
     this.selectedFilterOption = option;
-    this.alertsService.getAlerts(this.selectedFilterOption.key);
-    this.sortChanged();
+    this.page = 1;
+    this.alertsService.getAlerts(this.selectedFilterOption.key, this.page);
+    // this.sortChanged();
   }
 
   sortChanged() {
@@ -105,4 +117,9 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
+  loadData(event) {
+    console.log('load more');
+    this.page++;
+    this.alertsService.getAlerts(this.selectedFilterOption.key, this.page);
+  }
 }

@@ -21,9 +21,6 @@ export class TagsListComponent implements OnInit {
   ngOnInit() {
     this.tagsShow = this.tags.slice(0, this.showAmount);
     this.tagsRest = this.tags.slice(this.showAmount, this.tags.length);
-
-    console.log(this.tagsShow);
-    console.log(this.tagsRest);
   }
 
 }

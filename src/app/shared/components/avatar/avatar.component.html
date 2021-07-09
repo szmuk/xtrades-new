@@ -1,4 +1,4 @@
 <div class="avatar" [class.avatar--border]="showBorder">
   <img [src]="url" lazy (error)="error()" />
-  <div class="avatar__alerts" *ngIf="alertsCount > 0">{{alertsCount}}</div>
+  <div class="avatar__alerts" *ngIf="alertsCount > 0">{{alertsCount | number: '1.0-0'}}</div>
 </div>

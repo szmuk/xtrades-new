@@ -19,12 +19,15 @@ export class AlertsService {
     private alertsQuery: AlertsQuery) {
   }
 
-  getAlerts(filter: string): any {
-    this.alertsStore.setLoading(true);
-    return this.httpService.get(ApiTarget.api, `/api/v1/alerts?page=1&selectedFilter=${filter}&timeframe=0`).pipe(
+  getAlerts(filter: string, page: number): any {
+    if (page === 1) {
+      this.alertsStore.setLoading(true);
+    }
+    return this.httpService.get(ApiTarget.api, `/api/v1/alerts?page=${page}&selectedFilter=${filter}&timeframe=0`).pipe(
       map((res: any) => res.data),
       tap(data => {
-        this.alertsStore.set(data);
+        console.log(data);
+        this.alertsStore.upsertMany(data);
         this.alertsStore.update({ initialized: true });
         this.alertsStore.setLoading(false);
       }),
