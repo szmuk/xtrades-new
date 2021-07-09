@@ -1,0 +1,11 @@
+.tag {
+  border-radius: 5px;
+  padding: 5px 10px;
+  border: 1px solid var(--x-bg-lightgray);
+  color: var(--x-text-light);
+  background: var(--x-bg-lightgray);
+
+  &--bright {
+    background-color: white;
+  }
+}

@@ -16,6 +16,8 @@ import { MenuComponent } from './menu/menu.component';
 import { SentimentComponent } from './sentiment/sentiment.component';
 import { SortFilterListComponent } from './sort-filter/sort-filter-list/sort-filter-list.component';
 import { SortFilterComponent } from './sort-filter/sort-filter.component';
+import { TagComponent } from './tag/tag.component';
+import { TagsListComponent } from './tags-list/tags-list.component';
 import { TextDuplexComponent } from './text-duplex/text-duplex.component';
 import { TraderInfoComponent } from './trader-info/trader-info.component';
 
@@ -32,9 +34,11 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     HeaderOptionsComponent,
     CommentsListComponent,
     TraderInfoComponent,
+    TagsListComponent,
     CompanyLogoComponent,
     AlertModalComponent,
     AvatarComponent,
+    TagComponent,
     CommentsListItemComponent,
   ],
   exports: [
@@ -45,7 +49,9 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     CommentComponent,
     CommentsListComponent,
     AlertResultComponent,
+    TagsListComponent,
     TraderInfoComponent,
+    TagComponent,
     SentimentComponent,
     TextDuplexComponent,
     AlertModalComponent,

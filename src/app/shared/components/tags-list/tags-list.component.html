@@ -1,0 +1,6 @@
+<div class="tags">
+  <app-tag class="tags__tag" *ngFor="let tag of tagsShow" [dark]="dark">{{tag}}</app-tag>
+  <app-tag class="tags__tag" [dark]="!dark" *ngIf="tagsRest">
+    <ion-icon class="tags__more" name="ellipsis-horizontal"></ion-icon>
+  </app-tag>
+</div>

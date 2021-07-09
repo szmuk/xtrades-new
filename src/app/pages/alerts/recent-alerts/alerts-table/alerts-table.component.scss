@@ -81,13 +81,14 @@
 // DATE
 .date {
   flex-basis: 130px;
-  flex-grow: 1;
+  flex-grow: 0;
 }
 
 // STRATEGy
 .strategy {
   flex-basis: 200px;
   flex-grow: 4;
+  display: flex;
 }
 
 // RESULT

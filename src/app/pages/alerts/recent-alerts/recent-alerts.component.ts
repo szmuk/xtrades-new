@@ -65,14 +65,15 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
         this.sortChanged();
       }));
 
-      this.subscription.add(
-        this.alertsQuery.selectLoading().subscribe((loading: boolean) => {
-          this.loading = loading;
-          this.changeDetector.markForCheck();
-        }));
+    this.subscription.add(
+      this.alertsQuery.selectLoading().subscribe((loading: boolean) => {
+        this.loading = loading;
+        this.changeDetector.markForCheck();
+      }));
 
-      // TODO: if signal-r used, probably no need to load on every page load
-      this.alertsService.getAlerts('0');
+
+    // TODO: if signal-r used, probably no need to load on every page load
+    this.alertsService.getAlerts('0');
   }
 
   ngOnDestroy() {
@@ -91,15 +92,15 @@ export class RecentAlertsComponent implements OnInit, OnDestroy {
 
   sortChanged() {
     switch (this.selectedSortOption?.key) {
-      case 'price':
-        this.sortedFilteredAlertsList = [...this.sortedFilteredAlertsList.sort((a, b) => a.pricePaid < b.pricePaid ? 1 : -1)];
-        break;
-      case 'gain':
-        this.sortedFilteredAlertsList = [...this.sortedFilteredAlertsList.sort((a, b) => a.diffCalc < b.diffCalc ? 1 : -1)];
-        break;
-      default:
-        this.sortedFilteredAlertsList = this.sortedFilteredAlertsList;
-        break;
+    case 'price':
+      this.sortedFilteredAlertsList = [...this.sortedFilteredAlertsList.sort((a, b) => a.pricePaid < b.pricePaid ? 1 : -1)];
+      break;
+    case 'gain':
+      this.sortedFilteredAlertsList = [...this.sortedFilteredAlertsList.sort((a, b) => a.diffCalc < b.diffCalc ? 1 : -1)];
+      break;
+    default:
+      this.sortedFilteredAlertsList = this.sortedFilteredAlertsList;
+      break;
     }
     this.changeDetector.markForCheck();
   }
