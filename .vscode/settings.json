@@ -15,6 +15,9 @@
     "source.fixAll.eslint": true
   },
   "eslint.validate": [
-    "javascript"
-  ]
+    "javascript", "html"
+  ],
+  "eslint.options": {
+    "extensions": [ ".html", ".js", ".vue", ".jsx" ]
+  },
 }

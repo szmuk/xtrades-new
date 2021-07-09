@@ -3,10 +3,12 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
+  "plugins": ["html", "eslint-plugin-html"],
   "overrides": [
     {
       "files": [
-        "*.ts"
+        "*.ts",
+        "*.html"
       ],
       "parserOptions": {
         "project": [
@@ -22,6 +24,7 @@
       ],
       "rules": {
         "dot-notation": "off",
+        "indent": ["error", 2],
         "@angular-eslint/component-class-suffix": [
           "error",
           {
