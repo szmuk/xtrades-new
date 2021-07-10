@@ -1,11 +1,13 @@
 // TABLE
-.table2 {
+.table {
+  width: 100%;
+  display: block;
+
   &__row {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
 
     background-color: white;
     border-radius: 15px;
@@ -22,10 +24,6 @@
       transform: scale(1.005);
       box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.05);
       transition: all 0.2s ease;
-    }
-
-    @media (max-width: 991px) {
-      padding: 10px;
     }
 
     &--closed {
@@ -54,6 +52,7 @@
   height: 100%;
   flex-basis: 200px;
   flex-grow: 1;
+  flex-shrink: 1;
 
   &__info {
     flex-grow: 1;
@@ -70,6 +69,7 @@
   height: 100%;
   flex-basis: 250px;
   flex-grow: 1;
+  flex-shrink: 1;
 
   &__info {
     flex-grow: 1;
@@ -98,6 +98,8 @@
   flex-basis: 120px;
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 // SENTIMENT

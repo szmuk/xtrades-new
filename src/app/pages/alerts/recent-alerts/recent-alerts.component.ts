@@ -71,9 +71,7 @@ export class RecentAlertsComponent implements AfterViewInit, OnDestroy {
         // this.sortChanged();
         this.infiniteScroll.complete();
         this.infiniteScroll.disabled = false;
-        console.log(this.infiniteScroll);
         this.changeDetector.markForCheck();
-        console.log('loaded');
       }));
 
     this.subscription.add(

@@ -1,9 +1,9 @@
 
-<div class="table2">
+<div class="table" #table>
 
   <!-- LOADING INDICATOR -->
   <ng-container *ngIf="loading">
-    <div *ngFor="let i of [].constructor(10)" class="table2__row table2__row--loading loading-line">
+    <div *ngFor="let i of [].constructor(10)" class="table__row table__row--loading loading-line">
     </div>
   </ng-container>
 
@@ -16,60 +16,65 @@
 
     <!-- ALERTS TABLE -->
     <ion-virtual-scroll *ngIf="alerts?.length > 0" [items]="alerts" approxItemHeight="85px" [trackBy]="trackByFn" [itemHeight]="itemHeightFn" >
-        <div *virtualItem="let alert; let itemBounds = bounds;" class="table2__row" [class.table__row--closed]="alert.alertClosedDate"
+        <div *virtualItem="let alert; let itemBounds = bounds;" class="table__row" [class.table__row--closed]="alert.alertClosedDate"
           (click)="openAlert(alert)">
 
-          <!-- AVATAR, NAME -->
-          <div class="table2__col person">
+          <ng-container *ngIf="tableWidth > mobileBreakpoint">
+            <!-- AVATAR, NAME -->
+            <div class="table__col person">
+        
+              <app-avatar [profileId]="alert.userId" [alertsCount]="alert.userMeta.xScore"></app-avatar>
       
-            <app-avatar [profileId]="alert.userId" [alertsCount]="alert.userMeta.xScore"></app-avatar>
+              <app-text-duplex class="person__info">
+                <ng-container upper>{{alert.userName}}</ng-container>
+                <ng-container lower>{{'@' + alert.userName}}</ng-container>
+              </app-text-duplex>
+            </div>  
+
+
+            <!-- COMPANY, ACTION -->
+            <div class="table__col action">
+      
+              <app-company-logo></app-company-logo>
     
-            <app-text-duplex class="person__info">
-              <ng-container upper>{{alert.userName}}</ng-container>
-              <ng-container lower>{{'@' + alert.userName}}</ng-container>
-            </app-text-duplex>
-          </div>  
+              <app-text-duplex class="action__info">
+                <ng-container upper>{{(alert.alertClosedDate ? 'Sold ' : 'Bought ') + alert.symbol + ' shares'}}</ng-container>
+                <ng-container lower *ngIf="tableWidth > tabletBreakpoint">{{'@ USD ' + alert.pricePaid}}</ng-container>
+                <ng-container lower *ngIf="tableWidth <= tabletBreakpoint">
+                  <span *ngIf="alert.alertClosedDate">{{'Closed ' + getDate(alert.alertClosedDate) }}</span>
+                  <span *ngIf="!alert.alertClosedDate">{{'Opened ' + getDate(alert.timeOfEntryAlert) }}</span>
+                </ng-container>
+              </app-text-duplex>
+                
+            </div>  
+
+            <!-- DATE -->
+            <div class="table__col date" *ngIf="tableWidth > tabletBreakpoint">
+              <app-text-duplex>
+                <ng-container upper>{{'Closed ' + getDate(alert.alertClosedDate) }}</ng-container>
+                <ng-container lower>{{'Opened ' + getDate(alert.timeOfEntryAlert) }}</ng-container>
+              </app-text-duplex>
+            </div>  
 
 
-          <!-- COMPANY, ACTION -->
-          <div class="table2__col action">
-    
-            <app-company-logo></app-company-logo>
-  
-            <app-text-duplex class="action__info">
-              <ng-container upper>{{(alert.alertClosedDate ? 'Sold ' : 'Bought ') + alert.symbol + ' shares'}}</ng-container>
-              <ng-container lower>{{'@ USD ' + alert.pricePaid}}</ng-container>
-            </app-text-duplex>
-              
-          </div>  
+            <!-- STRATEGY -->
+            <div class="table__col strategy" *ngIf="tableWidth > smallerDesktopBreakpoint">
+              <div class="table__type__text">
+                <app-tags-list [tags]="['Swing', 'Other', 'Test', 'Test2']" [dark]="false"></app-tags-list>
+              </div>
+            </div>  
 
-          <!-- DATE -->
-          <div class="table2__col date">
-            <app-text-duplex>
-              <ng-container upper>{{'Closed ' + getDate(alert.alertClosedDate) }}</ng-container>
-              <ng-container lower>{{'Opened ' + getDate(alert.timeOfEntryAlert) }}</ng-container>
-            </app-text-duplex>
-          </div>  
-
-
-          <!-- STRATEGY -->
-          <div class="table2__col strategy">
-            <div class="table__type__text">
-              <app-tags-list [tags]="['Swing', 'Other', 'Test', 'Test2']" [dark]="false"></app-tags-list>
+            <!-- RESULT -->
+            <div class="table__col result">
+              <app-alert-result [alert]="alert"></app-alert-result>
             </div>
-          </div>  
 
-          <!-- RESULT -->
-          <div class="table2__col result">
-            <app-alert-result [alert]="alert"></app-alert-result>
-          </div>
-
-          <!-- SENTIMENT -->
-          <div class="table2__col sentiment">
-            <app-sentiment [alert]="alert"></app-sentiment>
-          </div>
-    
-
+            <!-- SENTIMENT -->
+            <div class="table__col sentiment">
+              <app-sentiment [alert]="alert"></app-sentiment>
+            </div>
+      
+          </ng-container>
 
 
         </div>
