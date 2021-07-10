@@ -20,6 +20,7 @@ export class RecentAlertsComponent implements AfterViewInit, OnDestroy {
   sortedFilteredAlertsList: Alert[] = [];
   alertsList: Alert[] = [];
   loading = false;
+  noMoreToLoad = false;
 
   page = 1;
 
@@ -80,6 +81,11 @@ export class RecentAlertsComponent implements AfterViewInit, OnDestroy {
         this.changeDetector.markForCheck();
       }));
 
+    this.subscription.add(
+      this.alertsQuery.select(x => x.noMoreToLoad).subscribe(noMore => {
+        this.noMoreToLoad = noMore;
+      })
+    );
 
     // TODO: if signal-r used, probably no need to load on every page load
     this.alertsService.getAlerts('0', this.page);

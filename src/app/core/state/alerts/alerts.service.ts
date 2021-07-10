@@ -27,6 +27,13 @@ export class AlertsService {
       map((res: any) => res.data),
       tap(data => {
         console.log(data);
+
+        if (page !== 1 && data?.length < 1) {
+          this.alertsStore.update({ noMoreToLoad: true });
+        } else {
+          this.alertsStore.update({ noMoreToLoad: false });
+        }
+
         this.alertsStore.upsertMany(data);
         this.alertsStore.update({ initialized: true });
         this.alertsStore.setLoading(false);
