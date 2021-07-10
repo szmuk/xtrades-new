@@ -44,6 +44,7 @@ export class TrendingTickersComponent implements OnInit, OnDestroy {
       this.trendingQuery.selectAll().subscribe((trending: Trending[]) => {
         this.trendingList = trending;
         this.sortChanged();
+        console.log(this.trendingList);
       })
     );
 

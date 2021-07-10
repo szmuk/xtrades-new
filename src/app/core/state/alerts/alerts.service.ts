@@ -26,8 +26,6 @@ export class AlertsService {
     return this.httpService.get(ApiTarget.api, `/api/v1/alerts?page=${page}&selectedFilter=${filter}&timeframe=0`).pipe(
       map((res: any) => res.data),
       tap(data => {
-        console.log(data);
-
         if (page !== 1 && data?.length < 1) {
           this.alertsStore.update({ noMoreToLoad: true });
         } else {

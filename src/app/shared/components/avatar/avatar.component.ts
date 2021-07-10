@@ -20,6 +20,6 @@ export class AvatarComponent implements OnInit {
   }
 
   error() {
-    this.url= 'assets/missing-avatar.png';
+    this.url = 'assets/missing-avatar.png';
   }
 }

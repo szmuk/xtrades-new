@@ -4,5 +4,6 @@ export class Trending {
   isBullish: boolean;
   percent: number;
   symbol: string;
+  logoUrl: string;
   time: string;
 }

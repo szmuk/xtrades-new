@@ -3,29 +3,43 @@
   <div class="tile__header">
     <div class="tile__header__data">
 
-      <app-company-logo></app-company-logo>
+      <app-company-logo [url]="trending.logoUrl"></app-company-logo>
 
-      <div class="tile__header__data__info">
-        <div class="tile__header__data__info__code">{{trending.symbol}}</div>
-        <div class="tile__header__data__info__name">{{trending.symbol}}</div>
-      </div>
+      <app-text-duplex class="tile__header__data__info hidden-sm-down">
+        <ng-container upper>{{trending.symbol}}</ng-container>
+        <ng-container lower>{{trending.symbol}}</ng-container>
+      </app-text-duplex>
     </div>
-    <ion-icon name="ellipsis-horizontal" class="tile__header__icon"></ion-icon>
+
+    <div class="tile__header__chart hidden-sm-down">
+      <img [src]="'assets/' + chartUrl" />
+    </div>
+
+    <ion-icon name="ellipsis-horizontal" class="tile__header__icon hidden-sm-up"></ion-icon>
   </div>
 
-  <!-- CHART -->
-  <div class="tile__chart">
-    <img [src]="'assets/' + chartUrl" />
-  </div>
 
   <!-- FOOTER -->
   <div class="tile__footer">
-    <div class="tile__footer__alerts">{{trending.count}} alerts</div>
-    <div class="tile__footer__trend">
-      <span [class.tile__footer__trend__bullish]="label === 'bullish'"
-        [class.tile__footer__trend__bearish]="label === 'bearish'">{{percent}}% </span>
-      <span>{{label}}</span>
+    <div class="tile__footer__mobile-company hidden-sm-up">
+      {{trending.symbol}}
     </div>
+
+    <div class="tile__footer__row">
+      <div class="tile__footer__alerts">{{trending.count}} alerts</div>
+
+      <div *ngIf="label === 'bullish'" class="tile__footer__trend tile__footer__trend__bullish">
+        {{percent}}% {{label}} <ion-icon name="arrow-up-outline" style="margin-bottom: -2px;"></ion-icon>
+      </div>
+
+      <div *ngIf="label === 'bearish'" class="tile__footer__trend tile__footer__trend__bearish">
+        {{percent}}% {{label}} <ion-icon name="arrow-down-outline" style="margin-bottom: -2px;"></ion-icon>
+      </div>
+    </div>
+    <div class="tile__footer__row tile__footer__details hidden-sm-down">
+      <div>Today</div>
+      <div>12 out of 14 alerts</div>
+      </div>
   </div>
 
 </div>

@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { Company } from 'src/app/core/models/company';
 
 @Component({
   selector: 'app-company-logo',
@@ -8,6 +7,9 @@ import { Company } from 'src/app/core/models/company';
 })
 export class CompanyLogoComponent {
 
-  @Input() company: Company;
+  @Input() url = 'assets/missing-company.png';
 
+  error() {
+    this.url = 'assets/missing-company.png';
+  }
 }

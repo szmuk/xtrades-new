@@ -1,12 +1,18 @@
 .tile {
   border-radius: 20px;
-  padding: 20px;
+  padding: 25px;
   background-color: white;
-  height: 185px;
-  width: 300px;
+  height: 175px;
+  width: 360px;
   box-shadow: 4px 6px 13px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 767px) {
+    height: 170px;
+    width: 160px;
+    padding: 20px;
+  }
 
   &__header {
     display: flex;
@@ -21,64 +27,69 @@
       align-items: center;
 
       &__info {
-        display: flex;
-        flex-direction: column;
         margin-left: 10px;
-
-        &__code {
-          margin-bottom: 5px;
-          font-weight: 500;
-        }
-
-        &__name {
-          color: var(--x-text-light);
-          font-size: 14px;
-        }
       }
     }
 
-    &__icon {
-      color: var(--x-text-darkgray);
-      font-size: 25px;
-      cursor: pointer;
-
-      &:hover {
-        color: var(--x-action);
-      }
+    &__chart {
+      flex-grow: 1;
+      flex-shrink: 1;
+      margin-left: 20px;
     }
-  }
 
-  &__chart {
-    flex-grow: 1;
-    flex-shrink: 1;
-    margin-top: 10px;
+    // &__icon {
+    //   color: var(--x-text-darkgray);
+    //   font-size: 25px;
+    //   cursor: pointer;
+
+    //   &:hover {
+    //     color: var(--x-action);
+    //   }
+    // }
   }
 
   &__footer {
-    flex-grow: 0;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 25px;
+
+    @media (max-width: 767px) {
+      margin-top: 15px;
+    }
+
+    &__mobile-company {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    &__row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 3px;
+    }
 
     &__alerts {
       font-weight: 500;
+      font-size: 22px;
     }
 
     &__trend {
-      font-size: 15px;
+      font-size: 14px;
       color: var(--x-text-light);
+      font-weight: 500;
 
       &__bullish {
         color: var(--x-success);
-        font-weight: 500;
       }
       &__bearish {
         color: var(--x-fail);
-        font-weight: 500;
       }
+    }
+
+    &__details {
+      font-size: 14px;
+      color: var(--x-text-light);
     }
   }
 }
