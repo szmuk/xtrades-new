@@ -1,18 +1,20 @@
 
 <div class="sentiment">
-  <div class="sentiment__action" [class.sentiment__action--toggled]="false"
-    (click)="comment($event, alert)">
-    <ion-icon name="chatbox"></ion-icon>
-    <div>{{99}}</div>
+  <div class="sentiment__action" [class.sentiment__action--toggled]="alert.alertSentimentHasLiked"
+    (click)="like($event, alert)">
+    <ion-icon name="thumbs-up"></ion-icon>
+    <div>{{alert.alertSentimentLikeCount}}</div>
   </div>
+
   <div class="sentiment__action" [class.sentiment__action--toggled]="false"
     (click)="save($event, alert)">
     <ion-icon name="bookmark"></ion-icon>
     <div>{{99}}</div>
   </div>
-  <div class="sentiment__action" [class.sentiment__action--toggled]="alert.alertSentimentHasLiked"
-    (click)="like($event, alert)">
-    <ion-icon name="thumbs-up"></ion-icon>
-    <div>{{alert.alertSentimentLikeCount}}</div>
+
+  <div class="sentiment__action" [class.sentiment__action--toggled]="false"
+    (click)="comment($event, alert)">
+    <ion-icon name="chatbox"></ion-icon>
+    <div>{{99}}</div>
   </div>
 </div>

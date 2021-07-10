@@ -3,6 +3,10 @@
     border-radius: 5px;
     padding: 5px 10px;
 
+    @media (max-width: 991px) {
+      font-size: 14px;
+    }
+
     &--made {
       color: white;
       background-color: var(--x-success);

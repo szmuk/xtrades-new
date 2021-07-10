@@ -1,6 +1,6 @@
 .sentiment {
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   align-items: center;
   height: 100%;
   color: var(--x-text-darkgray);
@@ -12,6 +12,10 @@
     padding: 7px 13px 7px 0;
     cursor: pointer;
     height: 100%;
+
+    &:last-child {
+      padding: 7px 0 7px 0;
+    }
 
     &--toggled {
       color: var(--x-action);

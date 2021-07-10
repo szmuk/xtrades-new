@@ -96,6 +96,10 @@ export class AlertsTableComponent implements OnInit, OnDestroy, AfterViewChecked
     return 95;
   }
 
+  itemMobileHeightFn(item, index) {
+    return 160;
+  }
+
   async openAlert(alert: Alert) {
 
     const data: AlertModalInput = {
