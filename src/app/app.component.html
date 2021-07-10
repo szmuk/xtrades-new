@@ -2,7 +2,7 @@
   <ion-split-pane contentId="main-content" class="split-pane" [class.split-pane-collapsed]="collapsed"
     (ionSplitPaneVisible)="splitPaneChanged()">
 
-    <ion-menu contentId="main-content" type="overlay" class="side-menu">
+    <ion-menu contentId="main-content" type="overlay" class="side-menu" *ngIf="!showBottomMenu">
       <ion-content>
         <app-menu></app-menu>
       </ion-content>
@@ -11,4 +11,37 @@
     <ion-router-outlet id="main-content"></ion-router-outlet>
 
   </ion-split-pane>
+
+  <ion-tabs *ngIf="showBottomMenu">
+
+    <ion-tab-bar slot="bottom">
+
+      <!-- ALERTS -->
+      <ion-tab-button tab="alerts">
+        <ion-icon name="pulse-outline"></ion-icon>
+        <ion-label>Alerts</ion-label>
+      </ion-tab-button>
+
+      <!-- LEADERBOARD -->
+      <ion-tab-button tab="leaderboard">
+        <ion-icon name="ribbon-outline"></ion-icon>
+        <ion-label>Leaderboard</ion-label>
+      </ion-tab-button>
+
+      <!-- XHUB -->
+      <ion-tab-button tab="xhub">
+        <ion-icon name="school-outline"></ion-icon>
+        <ion-label>Xhub</ion-label>
+      </ion-tab-button>
+
+      <!-- SETTINGS -->
+      <ion-tab-button tab="settings">
+        <ion-icon name="cog-outline"></ion-icon>
+        <ion-label>Settings</ion-label>
+      </ion-tab-button>
+      
+</ion-tab-bar>
+
+  </ion-tabs>
+
 </ion-app>

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
 import { AppQuery } from './app.query';
 import { AppStore } from './app.store';
 
@@ -13,6 +14,8 @@ export class AppService {
   constructor(
     private appStore: AppStore,
     private appQuery: AppQuery) {
+
+    this.checkInitialScreenMode();
   }
 
   toggleSideMenu() {
@@ -23,5 +26,23 @@ export class AppService {
   resetSideMenu() {
     this.appStore.update({ sideMenuCollapsed: false });
   }
+
+  private checkInitialScreenMode() {
+    const w = window.innerWidth;
+    let screenMode = AppScreenMode.desktop;
+
+    if (w < 768) {
+      screenMode = AppScreenMode.mobile;
+    } else if (w < 992) {
+      screenMode = AppScreenMode.tablet;
+    }
+
+    this.appStore.update({ initialScreenMode: screenMode });
+  }
 }
 
+export enum AppScreenMode {
+  mobile = 1,
+  tablet,
+  desktop
+}
