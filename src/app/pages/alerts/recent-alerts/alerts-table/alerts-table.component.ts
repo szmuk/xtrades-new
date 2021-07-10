@@ -7,12 +7,13 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  ViewChild } from '@angular/core';
+  ViewChild
+} from '@angular/core';
 import { AppQuery } from '@core/state/app/app.query';
 import { ModalController } from '@ionic/angular';
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { fromEvent, Subscription } from 'rxjs';
+import { debounceTime, throttleTime } from 'rxjs/operators';
 import { Alert } from 'src/app/core/models/alert';
 import { AlertsService } from 'src/app/core/state/alerts/alerts.service';
 import { AlertModalComponent, AlertModalInput } from 'src/app/shared/components/alert-modal/alert-modal.component';
@@ -47,6 +48,11 @@ export class AlertsTableComponent implements OnInit, OnDestroy, AfterViewChecked
     private appQuery: AppQuery) { }
 
   ngOnInit() {
+
+    this.subscription.add(
+      fromEvent(window, 'resize').pipe(throttleTime(100)).subscribe(x => this.checkTableWidth())
+    );
+
     this.subscription.add(
       this.appQuery.select(x => x.sideMenuCollapsed).pipe(debounceTime(100)).subscribe(collapsed => {
         this.checkTableWidth();
@@ -92,13 +98,8 @@ export class AlertsTableComponent implements OnInit, OnDestroy, AfterViewChecked
     event.preventDefault();
   }
 
-  itemHeightFn(item, index) {
-    return 95;
-  }
-
-  itemMobileHeightFn(item, index) {
-    return 160;
-  }
+  itemHeightFn = (item, index) => 95;
+  itemMobileHeightFn = (item, index) => 160;
 
   async openAlert(alert: Alert) {
 
@@ -118,7 +119,6 @@ export class AlertsTableComponent implements OnInit, OnDestroy, AfterViewChecked
 
   private checkTableWidth() {
     this.tableWidth = this.table.nativeElement.offsetWidth;
-    console.log('Tab width', this.table.nativeElement.offsetWidth);
     this.changeDetector.markForCheck();
   }
 }

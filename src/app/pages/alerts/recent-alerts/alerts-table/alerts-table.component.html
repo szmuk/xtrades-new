@@ -29,8 +29,8 @@
               <app-avatar [profileId]="alert.userId" [alertsCount]="alert.userMeta.xScore"></app-avatar>
       
               <app-text-duplex class="person__info">
-                <ng-container upper>{{alert.userName}}</ng-container>
-                <ng-container lower>{{'@' + alert.userName}}</ng-container>
+                <ng-container upper><div class="person__info__text-wrap">{{alert.userName}}</div></ng-container>
+                <ng-container lower><div class="person__info__text-wrap">{{'@' + alert.userName}}</div></ng-container>
               </app-text-duplex>
             </div>  
 

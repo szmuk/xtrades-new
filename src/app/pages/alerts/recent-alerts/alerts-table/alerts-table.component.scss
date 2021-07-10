@@ -49,11 +49,23 @@
   flex-grow: 1;
   flex-shrink: 1;
   padding-left: 10px;
+  min-width: 0;
 
   &__info {
     flex-grow: 1;
     flex-shrink: 1;
     margin-left: 15px;
+    min-width: 0;
+
+    &__text-wrap {
+      line-height: 18px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
   }
 }
 
