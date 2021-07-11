@@ -4,6 +4,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { ApiTarget, HttpService } from '../../services/http/http.service';
 import { TrendingQuery } from './trending.query';
 import { TrendingStore } from './trending.store';
+import * as signalR from '@aspnet/signalr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,21 @@ export class TrendingService {
     private httpService: HttpService,
     private trendingStore: TrendingStore,
     private trendingQuery: TrendingQuery) {
+
+    const connection = new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Information)
+      .withUrl('https://functions.alpha.xtrades.net/api/v1')
+      .build();
+
+    connection.start().then(() => {
+      console.log('connected to signal-r');
+    }).catch((err) => console.error(err));
+
+    connection.on('newAlert', (message: string) => {
+      console.log(message);
+    });
+
+    connection.onclose(() => console.log('disconnected from signal-r'));
   }
 
   getTrending(): any {
