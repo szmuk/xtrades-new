@@ -11,7 +11,7 @@ export class ChartComponent implements OnInit, AfterViewChecked {
 
   @Input() data: any;
   @Input() height = 50;
-  @Input() width = 200;
+  @Input() width = 180;
   @Input() bullish = false;
 
 

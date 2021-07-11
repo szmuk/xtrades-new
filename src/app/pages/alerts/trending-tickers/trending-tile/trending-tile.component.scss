@@ -28,12 +28,13 @@
 
       &__info {
         margin-left: 10px;
+        flex-grow: 1;
       }
     }
 
     &__chart {
-      flex-grow: 1;
-      flex-shrink: 1;
+      flex-grow: 0;
+      flex-shrink: 0;
       margin-left: 20px;
     }
 

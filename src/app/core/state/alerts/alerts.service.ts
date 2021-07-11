@@ -7,6 +7,7 @@ import { Alert } from '../../models/alert';
 import { ApiTarget, HttpService } from '../../services/http/http.service';
 import { AlertsQuery } from './alerts.query';
 import { AlertsStore } from './alerts.store';
+import * as signalR from '@aspnet/signalr';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,21 @@ export class AlertsService {
     private httpService: HttpService,
     private alertsStore: AlertsStore,
     private alertsQuery: AlertsQuery) {
+
+    const connection = new signalR.HubConnectionBuilder()
+      .configureLogging(signalR.LogLevel.Information)
+      .withUrl('https://functions.alpha.xtrades.net/api/v1')
+      .build();
+
+    connection.start().then(() => {
+      console.log('connected to signal-r');
+    }).catch((err) => console.error(err));
+
+    connection.on('newAlert', (message: string) => {
+      console.log(message);
+    });
+
+    connection.onclose(() => console.log('disconnected from signal-r'));
   }
 
   getAlerts(filter: string, page: number): any {

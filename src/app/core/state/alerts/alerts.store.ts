@@ -6,11 +6,13 @@ import { Alert } from '../../models/alert';
 export interface AlertsState extends EntityState<Alert> {
   initialized: boolean;
   noMoreToLoad: boolean;
+  newAlertsCount: number;
 }
 
 const initialState = {
   initialized: false,
-  noMoreToLoad: false
+  noMoreToLoad: false,
+  newAlertsCount: 0
 };
 
 @Injectable({ providedIn: 'root' })
