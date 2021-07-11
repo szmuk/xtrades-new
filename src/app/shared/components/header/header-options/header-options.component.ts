@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 
@@ -6,6 +6,7 @@ import { PopoverController } from '@ionic/angular';
   selector: 'app-header-options',
   templateUrl: './header-options.component.html',
   styleUrls: ['./header-options.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderOptionsComponent implements OnInit {
 

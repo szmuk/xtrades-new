@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { AlertModalComponent } from './alert-modal/alert-modal.component';
 import { AlertResultComponent } from './alert-result/alert-result.component';
 import { AvatarComponent } from './avatar/avatar.component';
+import { ChartComponent } from './chart/chart.component';
 import { CommentComponent } from './comment/comment.component';
 import { CommentsListItemComponent } from './comments-list/comments-list-item/comments-list-item.component';
 import { CommentsListComponent } from './comments-list/comments-list.component';
@@ -36,6 +37,7 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     TraderInfoComponent,
     TagsListComponent,
     CompanyLogoComponent,
+    ChartComponent,
     AlertModalComponent,
     AvatarComponent,
     TagComponent,
@@ -48,6 +50,7 @@ import { TraderInfoComponent } from './trader-info/trader-info.component';
     CompanyLogoComponent,
     CommentComponent,
     CommentsListComponent,
+    ChartComponent,
     AlertResultComponent,
     TagsListComponent,
     TraderInfoComponent,

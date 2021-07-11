@@ -12,7 +12,8 @@
     </div>
 
     <div class="tile__header__chart hidden-sm-down">
-      <img [src]="'assets/' + chartUrl" />
+      <!-- <img [src]="'assets/' + chartUrl" /> -->
+      <app-chart [data]="trending.chartData" [bullish]="label === 'bullish'"></app-chart>
     </div>
 
     <ion-icon name="ellipsis-horizontal" class="tile__header__icon hidden-sm-up"></ion-icon>
@@ -41,5 +42,4 @@
       <div>12 out of 14 alerts</div>
       </div>
   </div>
-
 </div>

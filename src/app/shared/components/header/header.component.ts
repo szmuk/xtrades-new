@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { AppQuery } from '@core/state/app/app.query';
 import { PopoverController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -8,6 +8,7 @@ import { HeaderOptionsComponent } from './header-options/header-options.componen
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent implements OnInit {
 
