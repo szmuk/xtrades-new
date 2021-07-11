@@ -14,13 +14,17 @@
         <app-trending-tile *ngFor="let i of [].constructor(6)" [loading]="true"
           class="trending__content__item">
         </app-trending-tile>
-  
       </ng-container>
 
-      <app-trending-tile *ngFor="let trending of filteredTrendingList" [trending]="trending"
-        class="trending__content__item">
-      </app-trending-tile>
+      <ng-container *ngIf="!loading">
+        <app-trending-tile *ngFor="let trending of filteredTrendingList" [trending]="trending"
+          class="trending__content__item">
+        </app-trending-tile>
+      </ng-container>
 
+      <ng-container *ngIf="filteredTrendingList?.length < 1">
+        There are no trending tickers right now
+      </ng-container>
     </div>
   </div>
 </div>
