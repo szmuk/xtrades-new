@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Trending } from 'src/app/core/models/trending';
@@ -18,6 +18,8 @@ export class TrendingTickersComponent implements OnInit, OnDestroy {
   trendingList: Trending[];
   filteredTrendingList: Trending[];
 
+  loading = false;
+
   selectedSortOption: SortFilterComponentOption;
 
   sortOptions: SortFilterComponentOption[] = [
@@ -35,7 +37,10 @@ export class TrendingTickersComponent implements OnInit, OnDestroy {
     },
   ];
 
-  constructor(private trendingQuery: TrendingQuery, private trendingService: TrendingService) { }
+  constructor(
+    private trendingQuery: TrendingQuery,
+    private changeDetector: ChangeDetectorRef,
+    private trendingService: TrendingService) { }
 
   ngOnInit() {
     this.selectedSortOption = this.sortOptions.find(x => x.key === 'month');
@@ -47,6 +52,12 @@ export class TrendingTickersComponent implements OnInit, OnDestroy {
         console.log(this.trendingList);
       })
     );
+
+    this.subscription.add(
+      this.trendingQuery.selectLoading().subscribe((loading: boolean) => {
+        this.loading = loading;
+        this.changeDetector.markForCheck();
+      }));
 
     if (!this.trendingQuery.getValue().initialized) {
       this.trendingService.getTrending();

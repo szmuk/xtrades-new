@@ -9,6 +9,7 @@ import { Trending } from 'src/app/core/models/trending';
 export class TrendingTileComponent implements OnInit {
 
   @Input() trending: Trending;
+  @Input() loading: boolean;
 
   chartUrl: string;
 
@@ -18,9 +19,9 @@ export class TrendingTileComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.percent = this.trending.percent;
+    this.percent = this.trending?.percent;
 
-    if (this.trending.isBullish) {
+    if (this.trending?.isBullish) {
       this.chartUrl = 'bullish.png';
       this.label = 'bullish';
     } else {

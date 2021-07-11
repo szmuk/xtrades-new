@@ -1,4 +1,8 @@
-<div class="tile">
+
+<div *ngIf="loading" class="tile loading-line">
+</div>
+
+<div *ngIf="!loading" class="tile">
   <!-- HEADER -->
   <div class="tile__header">
     <div class="tile__header__data">
