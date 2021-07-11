@@ -1,6 +1,5 @@
 import { AfterViewChecked, Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale } from 'chart.js';
-import { cloneDeep } from 'lodash';
+import { CategoryScale, Chart, LinearScale, LineController, LineElement, PointElement, Title } from 'chart.js';
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
 
 @Component({
@@ -20,15 +19,13 @@ export class ChartComponent implements OnInit, AfterViewChecked {
 
   chart: Chart;
 
-
   ngOnInit() {
     const color = getComputedStyle(document.documentElement)
       .getPropertyValue(this.bullish ? '--x-success' : '--x-fail');
 
     const data = {
-      labels: [...this.data.map(x => 'a')],
+      labels: [...this.data.map(x => '')],
       datasets: [{
-        label: 'b',
         borderColor: color,
         borderWidth: 2,
         tension: 0.4,
@@ -40,18 +37,9 @@ export class ChartComponent implements OnInit, AfterViewChecked {
       type: 'line',
       data,
       options: {
-        // tooltips: {
-        //   mode: 'index',
-        //   intersect: false
-        // },
-        // hover: {
-        //   mode: 'index',
-        //   intersect: false
-        // },
         animation: false,
         maintainAspectRatio: false,
         responsive: true,
-        // showTooltips: true,
         elements: {
           point:{
             radius: 0
