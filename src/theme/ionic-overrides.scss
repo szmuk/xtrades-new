@@ -1,0 +1,16 @@
+ion-button {
+  text-transform: none;
+  --border-radius: 10px;
+}
+
+.modal-wrapper {
+  --background: transparent;
+  --box-shadow: none;
+}
+
+@media (min-width: 767px) {
+  .modal-very-big .modal-wrapper {
+    width: 1400px;
+    height: 90%;
+  }
+}

@@ -1,3 +1,4 @@
+
 export const environment = {
   production: false,
   storageBaseUrl: 'https://xtradescorealpha.blob.core.windows.net',

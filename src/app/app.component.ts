@@ -28,6 +28,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.appQuery.select(x => x.initialScreenMode).pipe(filter(x => !!x)).subscribe(mode => {
         this.showBottomMenu = mode === AppScreenMode.mobile;
+        console.log(this.showBottomMenu);
       })
     );
   }

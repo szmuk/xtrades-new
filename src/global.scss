@@ -25,28 +25,11 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-ion-button {
-  text-transform: none;
-  --border-radius: 10px;
-}
-
 .content {
   --padding-top: 30px;
   --padding-bottom: 30px;
   --padding-start: 30px;
   --padding-end: 30px;
-}
-
-.modal-very-big .modal-wrapper {
-  --background: transparent;
-  --box-shadow: none;
-}
-
-@media (min-width: 767px) {
-  .modal-very-big .modal-wrapper {
-    width: 1400px;
-    height: 90%;
-  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -83,30 +66,4 @@ ion-button {
   .hidden-lg-up {
     display: none !important;
   }
-}
-
-// animated loading bars
-@keyframes placeHolderShimmer {
-  0% {
-    background-position: -868px 0;
-  }
-  100% {
-    background-position: 868px 0;
-  }
-}
-
-.animated-background {
-  animation-duration: 1.25s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: placeHolderShimmer;
-  animation-timing-function: linear;
-  background: var(--x-bg-gray);
-  background: linear-gradient(to right, var(--x-bg-gray) 8%, var(--x-bg-lightgray) 18%, var(--x-bg-gray) 33%);
-  background-size: 1800px 104px;
-  position: relative;
-}
-
-.loading-line {
-  @extend .animated-background;
 }
